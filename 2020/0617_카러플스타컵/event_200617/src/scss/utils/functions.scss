@@ -1,9 +1,0 @@
-@import './variables';
-
-@function getX ($value) {
-	@return $value - (2560- $min_width) / 2;
-}
-
-@function getY ($top, $value) {
-	@return ($value - $top)+px;
-}
