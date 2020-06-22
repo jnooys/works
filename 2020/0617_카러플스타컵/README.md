@@ -11,4 +11,4 @@ https://kartrush.nexon.com/event_200617-launching
 2. babel
 3. css-loader
 4. sass-loader
-5. jump
+5. jump.js
