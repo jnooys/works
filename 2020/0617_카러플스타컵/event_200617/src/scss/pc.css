@@ -1,0 +1,1251 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+KR:300&subset=korean");
+/* reset */
+html, body, div, p, img, span, a, em, strong, pre, h1, h2, h3, h4, h4, h5, h6, ul, ol, li, dl, dt, dd, table, tbody, thead, tfoot, tr, th, td, form, fieldset, legend, caption, input, textarea, button, select, video, iframe, header, article, aside, details, figcaption, figure, footer, hgroup, menu, nav, section {
+  margin: 0;
+  padding: 0;
+}
+
+header, article, aside, details, figcaption, figure, footer, hgroup, menu, nav, section {
+  display: block;
+  vertical-align: baseline;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  color: #737373;
+  line-height: 1;
+  background: #fff;
+  font-size: 16px;
+  font-family: "Noto Sans KR", "맑은 고딕", "Malgun gothic", "돋움", "dotum", sans-serif;
+}
+
+input, textarea, button, select {
+  font-size: 16px;
+  font-family: "Noto Sans KR", "맑은 고딕", "Malgun gothic", "돋움", "dotum", sans-serif;
+}
+
+img, fieldset, button {
+  border: 0;
+}
+
+input, button, textarea {
+  outline: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a, a:link {
+  text-decoration: none;
+  color: #737373;
+}
+
+a, img {
+  vertical-align: top;
+}
+
+.blind {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+.layerpop {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.8);
+  transition: opacity 300ms ease;
+}
+
+.layerpop .pop_wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  align-items: center;
+}
+
+.layerpop.show {
+  display: block;
+  opacity: 0;
+}
+
+.layerpop.fadein {
+  opacity: 1;
+}
+
+.layerpop .pop_content {
+  position: relative;
+  width: 90%;
+  margin: auto;
+}
+
+.layerpop .pop_content .btn_x {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4.8%;
+  display: block;
+  text-indent: -99999px;
+  overflow: hidden;
+  background: url("https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200617/images_53B2AD7031AAFF79/pc/btn_close_pop.png") no-repeat;
+  margin-left: -2.4%;
+}
+
+.layerpop .pop_content .btn_x:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.layerpop .pop_content:before, .layerpop .pop_content:after {
+  content: "";
+  display: block;
+  padding-top: 5.8%;
+}
+
+.pop_video .pop_content {
+  max-width: 1000px;
+}
+
+.pop_video .video_wrap {
+  position: relative;
+  background: #000;
+  padding-top: 56.2%;
+}
+
+.pop_video .video_wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* layout */
+#wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+section {
+  position: relative;
+}
+
+section .container {
+  position: relative;
+  width: 1500px;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+/* common */
+#lnb a, .intro .btn_play span, .intro .btn_detail, .content .btn a, nav a {
+  display: block;
+  text-indent: -99999px;
+  overflow: hidden;
+  background: url("https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200617/images_53B2AD7031AAFF79/pc/spr_btn.png") no-repeat;
+}
+
+section .object_wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+section .object_wrap div, section .object_wrap span {
+  position: absolute;
+}
+
+.content {
+  padding-top: 160px;
+}
+
+.content .container {
+  padding-top: 341px;
+}
+
+.content .title_wrap {
+  position: absolute;
+  top: 0;
+  left: 598px;
+  width: 305px;
+  height: 355px;
+}
+
+.content .title_wrap span {
+  position: absolute;
+  background: url("https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200617/images_53B2AD7031AAFF79/pc/spr_title_content.png") 0 0 no-repeat;
+  opacity: 0;
+}
+
+.content .title_wrap .hexagon {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(0.5);
+}
+
+.content .title_wrap .white, .content .title_wrap .txt {
+  top: 158px;
+  height: 109px;
+}
+
+.content .title_wrap .white {
+  left: 0;
+  width: 100%;
+  transform: scaleY(0);
+  background: #fff;
+}
+
+.content .title_wrap .txt {
+  left: -177px;
+  width: 660px;
+}
+
+.content .title_wrap .trophy {
+  transform: translateY(20px);
+}
+
+.content.active .title_wrap span {
+  opacity: 1;
+}
+
+.content.active .title_wrap .trophy {
+  transform: translateY(0);
+  transition: opacity 300ms ease, transform 500ms ease;
+  transition-delay: 150ms;
+}
+
+.content.active .title_wrap .hexagon {
+  transform: scale(1);
+  transition: opacity 300ms ease, transform 500ms cubic-bezier(0, 1, 0.5, 1);
+}
+
+.content.active .title_wrap .white {
+  transform: scaleY(1);
+  transition: transform 500ms cubic-bezier(0, 1, 0.5, 1);
+  transition-delay: 150ms;
+}
+
+.content.active .title_wrap .txt {
+  transition: opacity 300ms linear;
+  transition-delay: 400ms;
+}
+
+.content .content_wrap {
+  padding-left: 20px;
+}
+
+.content .content_wrap img {
+  display: block;
+}
+
+.content .content_wrap.cnt1 {
+  margin-bottom: 30px;
+}
+
+.content1 .title_wrap .hexagon {
+  background-position: 0px 0;
+}
+
+.content1 .title_wrap .txt {
+  background-position: 50% -447px;
+}
+
+.content1 .title_wrap .trophy {
+  top: 72px;
+  left: 115px;
+  width: 82px;
+  height: 86px;
+  background-position: 0px -936px;
+}
+
+.content1 .btn {
+  position: absolute;
+  top: 271px;
+  right: 0;
+  width: 505px;
+  height: 115px;
+}
+
+.content1 .btn a {
+  width: 100%;
+  height: 100%;
+  background-position: -776px -294px;
+}
+
+.content1 .btn a:hover {
+  background-position: -776px -415px;
+}
+
+.content2 .title_wrap .hexagon {
+  background-position: -350px 0;
+}
+
+.content2 .title_wrap .txt {
+  background-position: 50% -587px;
+}
+
+.content2 .title_wrap .trophy {
+  top: 85px;
+  left: 88px;
+  width: 129px;
+  height: 73px;
+  background-position: -113px -936px;
+}
+
+.content3 .title_wrap .hexagon {
+  background-position: -700px 0;
+}
+
+.content3 .title_wrap .txt {
+  background-position: 50% -727px;
+}
+
+.content3 .title_wrap .trophy {
+  top: 74px;
+  left: 108px;
+  width: 89px;
+  height: 84px;
+  background-position: -273px -936px;
+}
+
+#lnb {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 210px;
+  height: 100%;
+  z-index: 100;
+  flex-direction: column;
+  transition: left 300ms ease;
+}
+
+#lnb:before {
+  content: "";
+  position: absolute;
+  top: 140px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#lnb h1 {
+  width: 100%;
+}
+
+#lnb h1 a {
+  display: block;
+  height: 140px;
+  background-color: rgba(29, 31, 118, 0.9);
+}
+
+#lnb .btn_toggle {
+  position: absolute;
+  top: 0;
+  left: 210px;
+  width: 50px;
+  height: 50px;
+  background: rgba(29, 31, 118, 0.9);
+}
+
+#lnb .btn_toggle span {
+  position: absolute;
+  top: 23px;
+  left: 9px;
+  width: 32px;
+  height: 4px;
+  background: #fdbd10;
+  border-radius: 10px;
+  transition: all 300ms ease;
+}
+
+#lnb .btn_toggle span:first-child {
+  width: 10px;
+  margin: -8px 0 0 3px;
+  transform: rotate(45deg);
+}
+
+#lnb .btn_toggle span:last-child {
+  width: 15px;
+  margin: 6px 0 0 14px;
+  transform: rotate(45deg);
+}
+
+#lnb .btn_toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+#lnb .btn_toggle span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+#lnb.hide {
+  left: -210px;
+}
+
+#lnb.hide .btn_toggle span {
+  left: 12px;
+  width: 24px;
+  margin: 0;
+}
+
+#lnb.hide .btn_toggle span:first-child {
+  transform: translateY(-10px);
+  opacity: 1;
+}
+
+#lnb.hide .btn_toggle span:nth-child(2) {
+  transform: rotate(0);
+  opacity: 0;
+}
+
+#lnb.hide .btn_toggle span:nth-child(3) {
+  transform: rotate(0);
+}
+
+#lnb.hide .btn_toggle span:last-child {
+  transform: translateY(10px);
+  background: #fdbd10;
+}
+
+#lnb .gnb {
+  width: 160px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+#lnb .gnb li a {
+  position: relative;
+  height: 123px;
+  background-position: 0 -160px;
+}
+
+#lnb .gnb li a:before, #lnb .gnb li a:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  content: "";
+  height: 99px;
+}
+
+#lnb .gnb li a:before {
+  background: rgba(0, 0, 0, 0.4);
+  transform: translateX(-120%) skew(-30deg);
+  transition: transform 200ms ease;
+}
+
+#lnb .gnb li a:hover:before {
+  transform: translateX(0) skew(0);
+}
+
+#lnb .gnb li a:after {
+  box-sizing: border-box;
+  border: 3px solid #3f43ba;
+}
+
+#lnb aside {
+  position: relative;
+  margin: auto auto 40px;
+}
+
+#lnb aside ul {
+  display: flex;
+  justify-content: center;
+}
+
+#lnb aside ul li {
+  margin: 0 5px;
+}
+
+#lnb aside ul a {
+  width: 31px;
+  height: 25px;
+  background-position-y: -342px;
+  padding: 5px;
+}
+
+#lnb aside ul a:hover {
+  opacity: 0.5;
+}
+
+#lnb aside ul .btn_home {
+  background-position-x: 6px;
+}
+
+#lnb aside ul .btn_youtube {
+  background-position-x: -47px;
+}
+
+#lnb aside ul .btn_forum {
+  background-position-x: -100px;
+}
+
+#lnb aside .download_btn {
+  width: 160px;
+  margin: 15px auto 0;
+}
+
+#lnb aside .download_btn a {
+  height: 48px;
+}
+
+#lnb aside .download_btn a:last-child {
+  margin-top: 7px;
+}
+
+#lnb aside .download_btn .btn_app {
+  background-position: 0 -397px;
+}
+
+#lnb aside .download_btn .btn_google {
+  background-position: 0 -452px;
+}
+
+/* intro */
+.intro {
+  height: 1180px;
+}
+
+.intro:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  content: "";
+  width: 99.99%;
+  background: url("https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200617/images_53B2AD7031AAFF79/pc/bg_intro.jpg") center top no-repeat;
+  padding-left: 0.01%;
+}
+
+.intro #screen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #000;
+}
+
+.intro #screen.fade {
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.intro .btn_play {
+  position: absolute;
+  top: 690px;
+  left: 690px;
+  width: 118px;
+  height: 118px;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  border-radius: 100%;
+  transform: scale(0.8);
+}
+
+.intro .btn_play:hover {
+  animation: buttonHover 700ms ease alternate infinite;
+}
+
+.intro .btn_play span {
+  position: absolute;
+  top: 37px;
+  left: 43px;
+  width: 38px;
+  height: 43px;
+  background-position: -242px 0;
+}
+
+.intro .object_wrap span, .intro .star, .intro .btn_play, .intro .btn_detail {
+  opacity: 0;
+}
+
+.intro .char_wrap div span {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200617/images_53B2AD7031AAFF79/pc/spr_char_intro.png") 0 0 no-repeat;
+}
+
+.intro .char_wrap ._c1 {
+  top: 430px;
+  left: 764px;
+  width: 329px;
+  height: 197px;
+  transform: translate(-100px, -100px) scale(0) rotate(-30deg);
+  transform-origin: -50% 50%;
+}
+
+.intro .char_wrap ._c1 span {
+  background-position: -2206px 0;
+}
+
+.intro .char_wrap ._c2 {
+  top: 463px;
+  left: 473px;
+  width: 156px;
+  height: 167px;
+  transform: translate(150px, -150px) scale(0) rotate(30deg);
+  transform-origin: 100% 50%;
+}
+
+.intro .char_wrap ._c2 span {
+  background-position: -1980px 0;
+}
+
+.intro .char_wrap ._c3 {
+  top: 412px;
+  left: 826px;
+  width: 486px;
+  height: 283px;
+  transform: translate(-300px, -150px) scale(0) rotate(-30deg);
+  transform-origin: 0% 50%;
+}
+
+.intro .char_wrap ._c3 span {
+  background-position: -1388px 0;
+}
+
+.intro .char_wrap ._c4 {
+  top: 383px;
+  left: 177px;
+  width: 472px;
+  height: 472px;
+  transform: translate(200px, -200px) scale(0) rotate(30deg);
+  transform-origin: 100% 30%;
+}
+
+.intro .char_wrap ._c4 span {
+  background-position: -853px 0;
+}
+
+.intro .char_wrap ._c5 {
+  top: 311px;
+  left: 359px;
+  width: 799px;
+  height: 559px;
+  transform: translate(-70px, -200px) scale(0) rotate(0deg);
+  transform-origin: 50% 50%;
+}
+
+.intro .char_wrap ._c5 span {
+  background-position: 0px 0;
+}
+
+.intro .title_wrap span {
+  background: url("https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200617/images_53B2AD7031AAFF79/pc/spr_title_intro.png") 0 0 no-repeat;
+}
+
+.intro .title_wrap .subtitle {
+  top: 69px;
+  left: 430px;
+  width: 644px;
+  height: 58px;
+  transform: perspective(500px);
+  -ms-perspective: 500px;
+  transform-style: preserve-3d;
+}
+
+.intro .title_wrap .subtitle span {
+  top: 0;
+  height: 100%;
+}
+
+.intro .title_wrap .subtitle ._t1 {
+  left: 0px;
+  width: 152px;
+  background-position: -156px 0;
+  transform: translate3d(-50px, -25px, 200px);
+}
+
+.intro .title_wrap .subtitle ._t2 {
+  left: 172px;
+  width: 155px;
+  background-position: -328px 0;
+  transform: translate3d(-25px, -25px, 200px);
+}
+
+.intro .title_wrap .subtitle ._t3 {
+  left: 345px;
+  width: 154px;
+  background-position: -501px 0;
+  transform: translate3d(25px, -25px, 200px);
+}
+
+.intro .title_wrap .subtitle ._t4 {
+  left: 517px;
+  width: 127px;
+  background-position: -673px 0;
+  transform: translate3d(50px, -25px, 200px);
+}
+
+.intro .title_wrap .headline {
+  top: 143px;
+  left: 277px;
+  width: 964px;
+  height: 141px;
+}
+
+.intro .title_wrap .headline, .intro .title_wrap .headline div {
+  transform-style: preserve-3d;
+  -ms-perspective: 500px;
+  transform: perspective(500px);
+}
+
+.intro .title_wrap .headline div {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.intro .title_wrap .headline span {
+  top: 0;
+  height: 100%;
+}
+
+.intro .title_wrap .headline ._t1 {
+  left: 0px;
+  width: 138px;
+  background-position: 0px -101px;
+  transform: translate3d(100px, -100px, 300px);
+  transition-delay: 400ms !important;
+}
+
+.intro .title_wrap .headline ._t2 {
+  left: 138px;
+  width: 127px;
+  background-position: -138px -101px;
+  transform: translate3d(-100px, 100px, 300px);
+  transition-delay: 500ms !important;
+}
+
+.intro .title_wrap .headline ._t3 {
+  left: 271px;
+  width: 132px;
+  background-position: -271px -101px;
+  transform: translate3d(100px, -100px, 300px);
+  transition-delay: 600ms !important;
+}
+
+.intro .title_wrap .headline ._t4 {
+  left: 416px;
+  width: 131px;
+  background-position: -416px -101px;
+  transform: translate3d(-100px, 100px, 300px);
+  transition-delay: 700ms !important;
+}
+
+.intro .title_wrap .headline ._t5 {
+  left: 555px;
+  width: 137px;
+  background-position: -555px -101px;
+  transform: translate3d(100px, -100px, 300px);
+  transition-delay: 800ms !important;
+}
+
+.intro .title_wrap .headline ._t6 {
+  left: 836px;
+  width: 128px;
+  background-position: -836px -101px;
+  transform: translate3d(-100px, 100px, 300px);
+  transition-delay: 900ms !important;
+}
+
+.intro .title_wrap .star {
+  top: 143px;
+  left: 967px;
+  width: 142px;
+  height: 142px;
+  transform: scale(5);
+}
+
+.intro .title_wrap .star span {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-position: -690px -265px;
+  transform: rotate(720deg);
+}
+
+.intro .title_wrap .description {
+  top: 850px;
+  left: 289px;
+  width: 921px;
+  height: 59px;
+  background-position: 0 -441px;
+}
+
+.intro .btn_detail {
+  position: absolute;
+  top: 940px;
+  left: 475px;
+  width: 550px;
+  height: 125px;
+  background-position: -208px -268px;
+}
+
+.intro .btn_detail:hover {
+  background-position-y: -395px;
+}
+
+.intro.load .object_wrap span, .intro.load .star, .intro.load .btn_play, .intro.load .btn_detail {
+  opacity: 1;
+}
+
+.intro.load .char_wrap div {
+  transform: translate(0, 0) scale(1) rotate(0);
+  transition: transform 1s cubic-bezier(0, 1, 0.5, 1);
+}
+
+.intro.load .char_wrap div span {
+  transition: opacity 300ms ease;
+}
+
+.intro.load .char_wrap ._c1, .intro.load .char_wrap ._c1 span {
+  transition-delay: 400ms;
+}
+
+.intro.load .char_wrap ._c2, .intro.load .char_wrap ._c2 span {
+  transition-delay: 300ms;
+}
+
+.intro.load .char_wrap ._c3, .intro.load .char_wrap ._c3 span {
+  transition-delay: 200ms;
+}
+
+.intro.load .char_wrap ._c4, .intro.load .char_wrap ._c4 span {
+  transition-delay: 100ms;
+}
+
+.intro.load .char_wrap ._c5, .intro.load .char_wrap ._c5 span {
+  transition-delay: 0ms;
+}
+
+.intro.load .char_wrap .cover {
+  transition: opacity 100ms 1500ms linear;
+}
+
+.intro.load .btn_play {
+  transform: scale(1);
+  transition: opacity 300ms ease, transform 500ms ease;
+  transition-delay: 1600ms;
+}
+
+.intro.load .btn_detail {
+  transition: opacity 300ms linear;
+  transition-delay: 1300ms;
+}
+
+.intro.load .title_wrap .headline span {
+  transform: translate3d(0, 0, 0);
+  transition: opacity 300ms ease, transform 350ms cubic-bezier(0, 0.3, 0, 1.1);
+}
+
+.intro.load .title_wrap .star {
+  transform: scale(1);
+  transition: opacity 300ms ease, transform 1s cubic-bezier(0, 0.3, 0, 1.05);
+}
+
+.intro.load .title_wrap .star span {
+  transform: rotate(0);
+  transition: transform 1s cubic-bezier(0, 1, 0.5, 1);
+}
+
+.intro.load .title_wrap .star, .intro.load .title_wrap .star span {
+  transition-delay: 900ms;
+}
+
+.intro.load .title_wrap .subtitle span {
+  transition: opacity 300ms ease, transform 300ms ease;
+  transition-delay: 100ms;
+  transform: translate3d(0, 0, 0);
+}
+
+.intro.load .title_wrap .description {
+  transition: opacity 300ms linear;
+  transition-delay: 1200ms;
+}
+
+.step {
+  height: 189px;
+  padding-top: 181px;
+}
+
+.step span {
+  position: absolute;
+  background: url("https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200617/images_53B2AD7031AAFF79/pc/spr_step.png") 0 0 no-repeat;
+}
+
+.step ul {
+  display: flex;
+  width: 1098px;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.step li {
+  position: relative;
+  width: 34px;
+}
+
+.step li:not(:last-child):before {
+  content: "";
+  position: absolute;
+  top: 19px;
+  left: 44px;
+  width: 300px;
+  height: 1px;
+  background: #fdbd10;
+}
+
+.step li .shape {
+  position: relative;
+  width: 100%;
+  height: 39px;
+}
+
+.step li .shape .dot {
+  width: 100%;
+  height: 100%;
+  background-position: -228px -1240px;
+}
+
+.step li .shape .line {
+  top: 50%;
+  left: 50%;
+  width: 55px;
+  height: 63px;
+  background-position: -137px -1317px;
+  margin: -32px 0 0 -28px;
+}
+
+.step li .txt {
+  position: absolute;
+  top: 74px;
+  left: 50%;
+  width: 330px;
+  height: 111px;
+  display: block;
+  text-indent: -99999px;
+  overflow: hidden;
+  opacity: 0.5;
+  margin-left: -165px;
+}
+
+.step li._s1 .txt {
+  background-position: 0 0px;
+}
+
+.step li._s2 .txt {
+  background-position: 0 -180px;
+}
+
+.step li._s3 .txt {
+  background-position: 0 -360px;
+}
+
+.step li._s4 .txt {
+  background-position: 0 -540px;
+}
+
+.step li.before .txt {
+  opacity: 0.7;
+}
+
+.step li.before .shape .dot {
+  background-position: -148px -1240px;
+}
+
+.step li.active .txt {
+  opacity: 1;
+}
+
+.step li.active .shape .shadow {
+  width: 14px;
+  height: 14px;
+  top: 13px;
+  left: 9px;
+  background-position: -27px -1344px;
+}
+
+.step li.active .shape .dot {
+  background-position: -148px -1240px;
+}
+
+.step li.active .shape .flag {
+  top: -81px;
+  left: -21px;
+  width: 82px;
+  height: 104px;
+  background-position: 0 -1207px;
+  transform-origin: 50% 100%;
+  animation: flagMotion 1s infinite alternate linear;
+  -ms-animation: flagMotion 1s infinite alternate linear;
+}
+
+.line_wrap {
+  position: absolute;
+  top: 1180px;
+  left: 50%;
+  width: 2560px;
+  margin-left: -1280px;
+}
+
+.line_wrap span {
+  position: absolute;
+  background: url("https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200617/images_53B2AD7031AAFF79/pc/spr_line.png") 0 0 no-repeat;
+}
+
+.line_wrap .w949 {
+  width: 949px;
+  height: 613px;
+}
+
+.line_wrap .w732 {
+  width: 732px;
+  height: 472px;
+  background-position: 0 -800px;
+}
+
+.line_wrap .w651 {
+  width: 651px;
+  height: 420px;
+  background-position: 0 -1440px;
+}
+
+.line_wrap .w976 {
+  width: 976px;
+  height: 655px;
+  background-position: 0 -1960px;
+}
+
+.line_wrap .w745 {
+  width: 745px;
+  height: 482px;
+  background-position: 0 -2770px;
+}
+
+.line_wrap .w576 {
+  width: 576px;
+  height: 372px;
+  background-position: 0 -3354px;
+}
+
+.line_wrap ._l1 {
+  top: 74px;
+  left: 1777px;
+}
+
+.line_wrap ._l2 {
+  top: 558px;
+  left: 140px;
+}
+
+.line_wrap ._l3 {
+  top: 1708px;
+  left: 60px;
+}
+
+.line_wrap ._l4 {
+  top: 1525px;
+  left: 241px;
+}
+
+.line_wrap ._l5 {
+  top: 2002px;
+  left: 1649px;
+}
+
+.line_wrap ._l6 {
+  top: 3182px;
+  left: 111px;
+}
+
+.line_wrap ._l7 {
+  top: 3069px;
+  left: 1585px;
+}
+
+.line_wrap ._l8 {
+  top: 4343px;
+  left: 27px;
+}
+
+.line_wrap ._l9 {
+  top: 4199px;
+  left: 168px;
+}
+
+nav {
+  position: fixed;
+  top: 50%;
+  right: 25px;
+  width: 160px;
+  height: 270px;
+  z-index: 100;
+  background: url("https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200617/images_53B2AD7031AAFF79/pc/bg_nav.png") 0 0 no-repeat;
+  z-index: 100;
+  margin-top: -135px;
+}
+
+nav ul {
+  display: flex;
+  height: 123px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 39px 0 38px;
+}
+
+nav ul a {
+  width: 108px;
+  height: 24px;
+  background-position-x: -852px;
+}
+
+nav ul .on a, nav ul a:hover {
+  background-position-x: -998px;
+}
+
+nav ul .nav1 a {
+  background-position-y: 0px;
+}
+
+nav ul .nav2 a {
+  background-position-y: -50px;
+}
+
+nav ul .nav3 a {
+  background-position-y: -100px;
+}
+
+nav .btn_apply {
+  height: 70px;
+  background-position: -946px -200px;
+}
+
+nav .btn_top {
+  position: absolute;
+  right: 0;
+  bottom: -50px;
+  width: 50px;
+  height: 0;
+  opacity: 0;
+  background-position: -852px -200px;
+  transition: opacity 300ms ease;
+}
+
+nav .btn_top.show {
+  height: 50px;
+  opacity: 1;
+}
+
+footer {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  text-align: center;
+}
+
+footer .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 20px;
+}
+
+footer .nexon {
+  width: 68px;
+  height: 21px;
+  display: block;
+  text-indent: -99999px;
+  overflow: hidden;
+  background: url("https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200617/images_53B2AD7031AAFF79/pc/logo_nexon.png") no-repeat;
+  margin-bottom: -7px;
+}
+
+footer .copyright {
+  font-size: 12px;
+  margin: 0 10px;
+}
+
+footer .btn_policy {
+  width: 103px;
+  height: 22px;
+  font-size: 12px;
+  border: 1px solid #737373;
+}
+
+footer .btn_policy:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+@keyframes buttonHover {
+  0% {
+    transform: scale(1);
+  }
+  90% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes flagMotion {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}
+
+@-ms-keyframes flagMotion {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}
