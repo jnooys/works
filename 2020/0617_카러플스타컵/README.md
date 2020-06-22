@@ -1,5 +1,5 @@
 # 카러플스타컵
-https://kartrush.nexon.com/event_200617-launching
+[https://kartrush.nexon.com/event_200617-launching](https://kartrush.nexon.com/event_200617-launching){: target="_blank"}
 
 ## specifications
 1. IE11+, Modern Broswer 지원
