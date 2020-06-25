@@ -14,25 +14,27 @@ export default class ScrollActive {
 		this.event(target);
 	}
 
-	static getPoint = ($target, options) => {
+	static getBCR ($target) {
+		const clientRect = $target.getBoundingClientRect();
+		return {top: clientRect.top, bottom: clientRect.bottom};
+	}
+
+ 	getPoint ($target, i) {
 		const documentHeight = document.documentElement.scrollHeight;
 		const pageYOffset = window.pageYOffset;
 		const lastScroll = Math.max(documentHeight - window.innerHeight, 0);
-		const getRect = (target) => {
-			const clientRect = target.getBoundingClientRect();
-			return {top: clientRect.top, bottom: clientRect.bottom, width: clientRect.width, height: clientRect.height};
-		}
-		const elementRect = getRect($target);
+		const elementRect = this.constructor.getBCR($target);
 		const point = {};
-		point.from = options.activePoint.from ? options.activePoint.from : Math.min(Math.floor(pageYOffset + elementRect.top - options.distance), lastScroll);
-		point.to = (!options.reverse || point.from == lastScroll) ? documentHeight : options.activePoint.to ? options.activePoint.to : Math.min(Math.floor(pageYOffset + elementRect.bottom - options.distance), lastScroll);
-    return point;
+		point.from = Math.min(Math.floor(pageYOffset + elementRect.top - this.options.distance), lastScroll);
+		point.to = (!this.options.reverse || point.from == lastScroll || i == this.targetLength - 1) ? documentHeight : Math.min(Math.floor(pageYOffset + elementRect.bottom - this.options.distance), lastScroll);
+		return Object.assign({}, point, this.options.activePoint);
   }
 
 	init(target) {
-		!this.targetElement && (this.targetElement = document.querySelectorAll(target));
+		this.targetElement = document.querySelectorAll(target);
+		this.targetLength = this.targetElement.length;
 		this.targetList = Array.from(this.targetElement).map(($el, i) => {
-			return { $el, ...this.constructor.getPoint($el, this.options)};
+			return { $el, ...this.getPoint($el, i)};
 		});
 	}
 
@@ -57,9 +59,8 @@ export default class ScrollActive {
 	}
 
 	resize () {
-		if(typeof this.options.activePoint.length) return;
 		this.targetList = this.targetList.map((el, i) => {
-			return { ...el, ...this.constructor.getPoint(el.$el, this.options, i)};
+			return { ...el, ...this.getPoint(el.$el, i)};
 		});
 	}
 
@@ -106,7 +107,7 @@ class NavActive extends ScrollActive {
 	getTargetPoint () {
 		this.targetList = this.targetList.reduce((acc, el, i) => {
 			const $target = document.querySelector(this.targetElement[i].firstChild.getAttribute('href'));
-			const point = {...el, ...this.constructor.getPoint($target, this.options, i)};
+			const point = {...el, ...this.getPoint($target, i)};
 			
 			acc.push(point);
 			return acc;
