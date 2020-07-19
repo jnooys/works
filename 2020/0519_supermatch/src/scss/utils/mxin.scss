@@ -1,0 +1,35 @@
+// mixin
+@mixin absolute($top: null, $right: null, $bottom: null, $left: null) {
+	position: absolute;
+	top: $top;
+	right: $right;
+	left: $left;
+	bottom: $bottom;
+}
+
+@mixin clearfix {
+	*zoom: 1;
+
+	&:after {
+			content : "";
+			display: block; 
+			clear: both;
+	}
+}
+
+@mixin ir ($background: null, $position: 0 0) {
+	text-indent: -99999px;
+	overflow: hidden;
+	@if($background) {
+			background: url($dir+$background) $position no-repeat;
+	}
+}
+
+@mixin square ($value) {
+	width: $value;
+	height: $value;
+}
+
+@mixin bgImg ($file, $position: 0 0) {
+  background: url($dir+$file) $position no-repeat;
+}

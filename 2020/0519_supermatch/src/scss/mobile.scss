@@ -1,0 +1,1388 @@
+// variable
+$dir: 'https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/launching/images_9B452F71D3CCA09B/mobile/';
+
+// common
+@import './common';
+
+// mixin
+@mixin bgImg ($file, $position: 0 0) {
+	background-image: url($dir+$file);
+	background-position: $position;
+	background-repeat: no-repeat;
+}
+
+/* layout */
+#wrap {
+	position: relative;
+	min-width: 375px;
+	max-width: 640px;
+	margin:0 auto;
+}
+
+section {
+	position: relative;
+	background-size: cover;
+	box-sizing: border-box;
+	padding-top: 50px;
+
+	&.align {
+
+		.container {
+			display: flex;
+			justify-content: center;
+			align-items: center; 
+			min-height: calc(100vh - 50px);
+			max-height: 650px;
+		}
+
+		.content_wrap {
+			width: 100%;
+			margin: 20px 0 80px;
+		}
+	}
+
+	.content_wrap {
+		position: relative;
+	}
+}
+
+.container {
+	position: relative;
+	width: 375px;
+	margin:0 auto;
+}
+
+/* common */
+
+body {
+  color: #777;
+}
+
+img { 
+  max-width: 100%;
+}
+
+.btn {
+	@include ir;
+	background-color: #2e3191;
+	background-size: auto 100%;
+	background-position: 50% 0;
+}
+
+
+.util {
+	$class: btn_yt, btn_fr, btn_fb, btn_tw, btn_copy;
+
+	li {
+		width: 30px;
+		height: 30px;
+	}
+
+	a, button {
+		display: block;
+		width: 100%;
+		height: 100%;
+		@include ir('spr_btn_util.png');
+		background-size: auto 30px;
+	}
+
+	@each $cls in $class {
+		$i: index($class, $cls);
+
+		.#{$cls} {
+				background-position: (1 - $i) * 30+px 0;
+		}
+	}
+}
+
+#btn_toggle {
+	position: fixed;
+	top: 8px;
+	left: 25px;
+	width: 33px;
+	height: 33px;
+	z-index: 110;
+
+	span {
+		@include absolute($left: 0);
+		width: 100%;
+		height: 4px;
+		background: #2E3191;
+		transition: transform 300ms ease;
+
+		@for $i from 1 through 3 {
+			&:nth-child(#{$i}){
+				top: ($i - 1) * 9 + 6+px;
+			}
+		}
+	}
+
+	.gnb_show & {
+		left: 21px;
+		
+		span {
+			&:first-child, &:last-child {
+				top: 15px;
+				width: 28px;
+				left: 2px;
+				background: #ffba00;
+			}
+	
+			&:nth-child(2) {
+				opacity :0;
+			}
+
+			&:first-child {
+				transform: rotate(45deg);
+			}
+
+			&:last-child {
+				transform: rotate(-45deg);
+			}
+		}
+	}
+}
+
+/* header */
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	overflow: hidden;
+	background:#fff;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+	z-index: 100;
+
+	h1 {
+		@include absolute($top: 7px, $left: 50%);
+		width: 104px;
+		height: 35px;
+		margin-left: -52px;
+
+		a {
+			display: block;
+			width: 100%;
+			height: 100%;
+			@include ir('h1.png');
+			background-size: auto 100%;
+
+			.tw & {
+					background-image:url(#{$dir}tw/h1.png);
+			}
+		}
+  }
+
+	.util {
+		@include absolute($top:9px, $right: 0);
+		width: 94px;
+		overflow: hidden;
+
+		li {
+			float: left;
+			margin:0 7px;
+		}
+	}
+}
+
+.gnb {
+	display: none;
+	position: fixed;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	z-index: 100;
+
+	#wrap.gnb_show & {
+		display: block;
+	}
+
+	.gnb_wrap {
+		@include absolute($top: 0, $bottom:0, $left: 0);
+		width: 100%;
+		overflow: hidden;
+		overflow-y: scroll;
+	}
+
+	.container {
+		padding: 100px 0;
+	}
+
+	.logo {
+		display: block;
+		width: 240px;
+		height: 81px;
+		margin: 0 auto 50px;
+		@include ir('h1.png');
+		background-size: auto 100%;
+
+		.tw & {
+			background-image:url(#{$dir}tw/h1.png);
+		}
+	}
+    
+    nav {
+
+		li {
+			width: 240px;
+			margin:0 auto 39px;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		a {
+			display: block;
+			@include ir;
+			height: 35px;
+			background-size: auto 280px !important;
+
+			@each $la in $lang {
+				.#{$la} & {     
+					background:url(#{$dir}#{$la}/spr_txt_nav.png) 50% 0 no-repeat;
+				}
+			}
+		}
+			
+		@for $i from 1 through 4 {
+			$pos_x : (1 - $i) * 70;
+			.nav#{$i} {
+				a {
+					background-position: 50% #{$pos_x}px;
+
+					&.on {
+						background-position: 50% ($pos_x - 35)+px;
+					}
+				}
+			}
+		}
+	}
+
+	.util {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		margin-top: 68px;
+
+		li {
+			margin: 0 12px;
+		}
+	}
+}
+
+/* footer */
+.footer {
+	$footer: footer;
+	@include absolute($bottom: 20px, $left: 0);
+	width: 100%;
+	text-align: center;
+	font-size: 9px;
+
+	.nexon {
+		display: block;
+		width: 57px;
+		height: 18px;
+		@include ir('logo_nexon.png');
+		background-size: 114px auto;
+		margin:0 auto;
+	}
+
+	div {
+		display: flex;
+		width: 100%;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		line-height: 14px;
+	}
+
+	.copyright {
+		height: 16px;
+	}
+
+	a {
+		height: 16px;
+		box-sizing:border-box;
+		border: 0.5px solid #777;
+		padding:0 5px;
+		margin-left: 5px;
+	}
+
+	.tw & {
+		.grade {
+			width: 332px;
+			height: 15px;
+			@include ir;
+			background: url(#{$dir}/tw/logo_grade.png) no-repeat;
+			background-size: 100% auto;
+			margin:0 auto;
+		}
+	}
+
+  .content3 & {
+    color: #d7d7d7;
+
+		.nexon {
+			background-position: -57px 0;
+		}
+
+		.grade {
+			background-position: 0 -15px;
+		}
+
+		a {
+			border-color: #d7d7d7;
+		}
+	}
+}
+
+/* intro */
+.intro {
+  z-index: 2;
+	@include bgImg('bg_main.jpg', 50% 30%);
+
+	.container {
+		height: calc(100vh - 50px);
+		min-height: 390px;
+	}
+
+	.title_wrap {
+		@include absolute($bottom: 6%, $left: 0);
+		width: 100%;
+
+		h2 {
+			height: 98px;
+			@include ir('logo_kartrush.png', 50% 0);
+			background-size: auto 100%;
+
+			.tw & {
+				background-image:url(#{$dir}tw/logo_kartrush.png);
+			}
+		}
+
+		p {
+			height: 60px;
+			@include ir;
+			background-size: auto 100% !important;
+			
+			@each $la in $lang {
+				.#{$la} & {     
+					background:url(#{$dir}#{$la}/txt_main.png) 50% 0 no-repeat;
+				}
+			}
+		}
+
+		.btn_play {
+			@include absolute($top:-108px, $left: 50%);
+			width: 93px;
+			height: 93px;
+			@include ir('icon_play_main.png', 50% 50%);
+			background-size: auto 34px;
+			background-color:rgba(255, 255, 255, 0.7);
+			box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+			border-radius: 100%;
+			margin-left: -47px;
+		}
+
+		.download_btn {
+			display: flex;
+			width: 304px;
+			height: 53px;
+			justify-content: space-between;
+			margin:0 auto;
+			
+			a {
+				width: 145px;
+				height: 100%;
+				background-size: auto 100%;
+				@include ir;
+
+				@each $la in $lang {
+					.#{$la} & {
+						background-image: url('#{$dir}#{$la}/spr_btn_main.png');
+					}
+				}
+			}
+
+			.btn_google {
+				background-position: 100% 0;
+			}
+		}
+	}
+
+	.banner {
+		@include absolute($top: 60px, $right:11px);
+		width: 136px;
+		height: 132px;
+
+		a {
+			display: block;
+			width: 100%;
+			height: 100%;
+			@include ir('kr/bg_banner_match.png');
+			background-size: 100% auto;
+			transform: scale(0);
+		}
+  }
+    
+	&.load {
+
+		.banner {
+			animation: vibrateBanner 100ms 10 ease;
+
+			a {
+				transform: scale(1);
+				transition: transform 300ms cubic-bezier(0, 0.3, 0.3, 1.5);
+			}
+		}   
+	}
+}
+
+/*supermatch*/
+
+.supermatch {
+    
+	.bg {
+		@include absolute($left: 50%);
+		width: 640px;
+		height: 100%;
+		background-size: 640px auto;
+		margin-left: -320px;
+	}
+
+	&:not(.event2) {
+
+		.bg {
+			top: 50px;
+		}
+	}
+
+	.btn {
+		@include absolute($left: 50%);
+		width: 180px;
+		height: 43px;
+		margin-left: -90px;
+	}
+}
+
+.matchmain {
+    z-index: 1;
+    margin: -50px 0;
+
+    .bg {  
+      @include bgImg('#{$matchdir}bg_main.jpg', center top);         
+    }
+
+    .container {
+      height: 503px;
+    }
+
+    .btn_apply {
+			bottom: 26px;
+			background-image: url(#{$dir}#{$matchdir}btn_apply.png);
+        
+    }
+
+    .btn_play {
+			@include absolute($bottom: 335px,$left: 50%);
+			@include square(52px);
+			background-image: url(#{$dir}#{$matchdir}btn_play.png);
+			background-size: 52px auto;
+			margin-left: -26px;
+    }
+}
+
+.event1 {
+    
+	$class: dao, bazzi;
+
+	.bg {
+		@include absolute($top:50px, $left: 50%);
+		width: 640px;
+		height: 100%;
+		@include bgImg('#{$matchdir}bg_event1.jpg', center top);
+		margin-left: -320px;
+		background-size: 640px auto;
+	}
+
+	.container {
+		height: 1234px;
+		padding-top: 758px;
+		box-sizing: border-box;
+	}
+
+	.vote_wrap {
+		height: 476px;
+
+		> div {
+			position: relative;
+		}
+
+		.dao {
+			left: 0;
+		}
+
+		.bazzi {
+			right: 0;
+		}
+
+		.state {
+			$state: loose, win;
+			height: 59px;
+			@include clearfix;
+			padding: 42px 10px 0; 
+
+			> div {
+				position: relative;
+				@include square(55px);
+				background: #fff;
+				border-radius: 100%;
+
+				&:first-child {
+					float: left;
+				}
+
+				&:last-child {
+					float: right;
+				}
+
+				> span {
+					position: absolute;
+				}
+			}
+
+			.char {
+				top: -12px;
+				left: -8px;
+				width: 69px;
+				height: 68px;
+				@include bgImg('#{$matchdir}spr_char_state.png');
+				background-size: auto 136px;
+			}
+
+			.per {
+				opacity: 0;
+				@include absolute($bottom: 2px);
+				color: #fff;
+				font-size: 20px;
+			}
+
+			.bubble {
+				top: -12px;
+				width: 103px;
+				height: 44px;
+				@include bgImg('#{$matchdir}spr_bubble_state.png');
+				background-size: 206px auto;
+				opacity: 0;
+				transform: scale(0);
+			}
+
+			.dao {
+				.per {
+					left: 60px;
+				}
+
+				.bubble {
+					left: 59px;
+				}
+			}
+
+			.bazzi {
+
+				.per {
+					right: 63px;
+				}
+
+				.bubble {
+					right: 62px;
+				}
+			}
+
+			@each $cls in $class {
+				$i: index($class, $cls);
+
+				.#{$cls} {
+					$char_y: (1 - $i) * 68+px;
+					$bub_x: (1- $i) * 103px;
+
+					.char {
+						background-position: 0 $char_y;
+					}
+
+					.bubble {
+						background-position: $bub_x 0;
+					}
+
+					@each $sta in $state {
+						$j: index($state, $sta);
+
+						&.#{$sta} {
+
+							.char {  
+								background-position:  $j * -69+px $char_y;
+							}
+							
+							.bubble {  
+								background-position:  $bub_x $j * -44+px;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.graph {
+			height: 40px;
+			margin-bottom: 11px;
+
+			> span {
+				@include absolute($top: 0);
+				width: 50%;
+				height: 10px;
+				border-top: 15px solid;
+				border-bottom: 15px solid;
+			}
+
+			.dao {
+				transform-origin: 0 50%;
+				background: #1534e8;
+				border-color: #0b00ba;
+				z-index: 1;
+			}
+
+			.bazzi {
+				transform-origin: 100% 50%;
+				width: 100%;
+				background: #ff4276;
+				border-color: #eb306e;
+			}
+		}
+
+		.vote_btn {
+			position: relative;
+			height: 44px;
+
+			button {
+				@include absolute($top: 0);
+				width: 116px;
+				@include ir('#{$matchdir}spr_btn_vote.png');
+				background-size: 232px auto;
+				background-color: #2f0093;
+				height: 100%;
+				border-bottom: 4px solid #FE8A01;
+			}
+
+			@each $cls in $class {
+				$i: index($class, $cls);
+
+				.#{$cls} {
+					background-position: 116 * (1 - $i)+px;
+				}
+			}
+		}
+
+		&.active {
+
+			.per {
+				opacity: 1;
+			}
+
+			.bubble {
+				opacity: 1;
+				transform: scale(1);
+				transition: all 300ms ease;
+			}
+
+			@each $cls in (dao, bazzi) {
+
+				.#{$cls}{
+					.bubble {
+						animation: #{$cls}BubbleMotion 800ms 300ms infinite linear;
+					}
+				}
+			}
+		}
+	}
+}
+
+.event2 {
+  padding-top: 0;
+
+	.bg {
+		top: 0;
+		@include bgImg('#{$matchdir}bg_event2.jpg', center top);
+	}
+	
+	.container {
+		height: 464px;
+	}
+
+	.btn_share {
+		top: 146px;
+		@include bgImg('#{$matchdir}btn_share.png');
+	}
+
+	.btn_caution {
+		@include absolute($bottom: 37px, $left: 50%);
+		width: 119px;
+		height: 26px;
+		background-color: #7728f9;
+		@include ir('#{$matchdir}btn_caution.png');
+		background-size: auto 100%;
+		margin-left: -59px;
+	}
+}
+
+/* content2 */
+
+.content2 {
+  @include bgImg('bg_content2.jpg', 50% 0);
+
+	.content_wrap {
+		@include bgImg('bg_char_content2.png', 0 112px);
+		height: 559px;
+		background-size: 370px auto;
+
+		@each $la in $lang {
+			.#{$la} & {
+				h2 {
+					background:url(#{$dir}#{$la}/tit_content2.png) 50% 0 no-repeat;
+				}
+				.btn {
+					background-image:url(#{$dir}#{$la}/btn_forum_content2.png);
+				}
+			}
+		}
+	}
+    
+	h2 {
+		height: 138px;
+		@include ir;
+		background-size: 375px auto !important;
+	}
+
+	.btn {
+		@include absolute($bottom:0, $left: 50%);
+		width: 250px;
+		height: 65px;
+		margin-left: -125px;
+	}
+
+	.en & {
+
+		.container {
+			padding-top: 60px;
+		}
+
+		.content_wrap {
+			height: 566px;
+		}
+		
+		.sns_wrap {
+			$class : facebook, twitter, twitch, insta_na, insta_sea, discord;
+
+			position: relative; 
+			width: 214px;
+			margin: 20px auto 0;
+			padding-bottom: 33px;
+
+			ul {                
+				@include clearfix;
+			}
+				
+			li {
+				float: left;
+				height: 78px;
+				margin-right: 20px;
+
+				&:nth-child(3n) {
+						margin-right: 0;
+				}
+			}
+
+			a {
+				position: relative;
+				display: block;
+				@include square(58px);
+				box-sizing: border-box;
+				border: 2px solid #fff;
+				border-radius: 100%;
+				background: #2e3191;
+
+				span {
+					@include absolute($top:-2px, $left: -2px);
+					@include square(58px);
+					@include ir;
+					background-image:url(#{$dir}en/spr_icon_sns.png);
+					background-size: 348px auto;
+					pointer-events: none;
+				}
+
+				&.insta {
+					span {
+							height: 78px;
+					}
+				}
+			}
+
+			@for $i from 1 through length($class){
+				$cls: nth($class, $i);
+				$pos_x: 58 * (1 - $i)+px;
+				
+				.#{$cls} {
+					span {
+						background-position: $pos_x 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+.content3 {
+	@include bgImg('bg_content3.jpg', 50% 0);
+
+	@each $la in $lang {
+		.#{$la} & {
+			h2 {
+				background:url(#{$dir}#{$la}/tit_content3.png) 50% 0 no-repeat;
+			}
+
+			.btn {
+				background-image:url(#{$dir}#{$la}/btn_forum_content2.png);
+			}
+		}
+	}  
+
+	h2 {
+		height: 109px;
+		@include ir;
+		background-size: 375px auto !important;
+	}
+
+	.slide_wrap {
+		position: relative;
+		width: 325px;
+		margin:0 auto;
+
+		.slide_container {
+			width: 100%;
+			overflow: hidden;
+
+			li {
+				float: left;
+				img {
+						width: 325px;
+				}
+			}
+		}
+
+		.slide_nav {
+			margin-top: 15px;
+			font-size: 0;
+			text-align: center;
+
+			span {
+				display: inline-block;
+				width: 13px;
+				height: 13px;
+				border-radius: 100%;
+				background: rgba(#000, 0.2);
+				margin:0 4px;
+
+				&.swiper-pagination-bullet-active {
+					background-color: #007aff;
+				}
+			}
+		}
+
+		button {
+			$pos_x: -35px;
+
+			@include absolute($top: 92px);
+			width: 61px;
+			height: 61px;
+			@include bgImg('spr_btn_slide.png');
+			background-size: auto 100%;
+			z-index: 5;
+
+			&.btn_prev {
+				left: $pos_x;
+			}
+
+			&.btn_next {
+				right: $pos_x;
+				background-position: 100% 0;
+			}
+		}
+	}
+
+	.youtube_wrap {
+
+		@each $la in $lang {
+			.#{$la} & {
+
+				h3 {
+					background:url(#{$dir}#{$la}/tit_youtube_content3.png) 50% 0 no-repeat;
+				}
+
+				.btn {
+					background-image:url(#{$dir}#{$la}/btn_yt_content3.png);
+				}
+			}
+		}
+
+		h3 {
+			height: 64px;
+			background-size: 375px auto !important;
+			@include ir;
+		}
+
+		.btn {
+			display: block;
+			width: 250px;
+			height: 65px;
+			margin:0 auto;
+		}
+	}
+}
+
+/* modalpop */
+.modalpop {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	z-index: 9999999;
+	background: rgba(0, 0, 0, 0.8);
+
+  .pop_wrap {
+		@include absolute($top:0, $left: 0);
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		overflow-y: scroll;
+		align-items: center;
+	}
+
+  .pop_content {
+		position: relative;
+		width: 92%;
+		max-width: 460px;
+		margin: auto;
+
+		&:before, &:after {
+			content:"";
+			display: block;
+			padding-top: 9.86%;
+		}
+	}
+
+	.btn_x {
+		@include absolute($top:0,$left: 50%);
+		width: 8.27%;
+		@include ir('btn_pop_close.png');
+		background-size: 100% auto;
+		margin-left: -4.14%;
+
+		&:after {
+			content:"";
+			display: block;
+			padding-top: 100%;
+		}
+	}
+
+	.pop_body {
+		font-size: 13px;
+		background: #fff;
+		line-height:1.35;
+		text-align: center; 
+		letter-spacing: -0.05em;
+		padding: 37px 20px 40px;
+
+		.kr & {
+			word-break: keep-all;
+		}
+	}
+
+	h2 {
+		color: #2e3191;
+		letter-spacing: -0.08em;
+	}
+
+	.team {
+		color: #ff5a00;
+	}
+
+	.pop_btn {
+		display: flex;
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+		margin: 14px -5px 0;
+
+		button {
+			display: inline-block;
+			width: 120px;
+			height: 46px;
+			background-size: auto 100%;
+			@include ir;
+			background-color: #2e3191;
+			background-position: center top;
+			margin:0 5px;
+		}
+		
+		.btn_share {
+			@include bgImg('kr/btn_share_pop.png', center top);
+		}
+
+		.btn_confirm {
+			@include bgImg('kr/btn_confirm_pop.png', center top);
+		}
+
+		.btn_register {
+			@include bgImg('kr/btn_register_pop.png', center top);
+		}
+
+		.btn_finish {
+			@include bgImg('kr/btn_finish_pop.png', center top);
+		}
+
+		.btn_cancel {
+			@include bgImg('kr/btn_cancel_pop.png', center top);
+			background-color: #888;
+		}
+	}
+}
+
+.pop_alert {
+
+	.pop_body {
+		font-size: 15px;
+	}
+
+	h2 {
+		font-size: 28px;
+	}
+
+	.alert_wrap {
+		margin-bottom: 29px;
+
+		h2 {
+			margin: -3px 0 25px;
+		}
+
+		strong {
+			display: block;  
+		}
+
+		.cs {
+			font-size: 17px;
+			color: #4e4d4d;
+			margin: 4px 0;
+		}
+
+		.date {
+
+			.kr & {
+				color: #6a6cad;
+				margin-bottom: 19px;
+			}
+
+			strong {
+				font-size: 17px;
+				margin-bottom: 6px;
+				color: #2e3191;
+			}
+		}
+	}
+}
+
+.pop_info {
+
+	h2 {
+			font-size: 24px;
+			margin-bottom: 14px;
+	}
+
+	li {
+		position: relative;
+		text-align: left;
+		padding-left: 10px;
+
+		&:before {
+			@include absolute($top: 8px, $left: 0);
+			content:"";
+			width: 2px;
+			height: 2px;
+			background: #9E9E9E;
+		}
+	}
+
+	.agree1 {
+
+		.h2 {
+			margin-top: 40px;
+		}
+		p {
+			color: #6a6cad;
+		}
+		table {
+			width: 100%;
+			margin-top: 11px;
+
+			th, td {
+				border: 1px solid #aaa;
+			}
+
+			th {
+				width: 110px;
+				height: 35px;
+				color: #4d4d4d;
+				background: #e5e5e5;
+			}
+
+			td {
+				text-align: center;
+				strong {
+					font-size: 14px;
+					color: #4e4d4d;
+					font-weight: normal;
+				}
+			}
+		}
+
+		ul {
+			padding-top: 8px;
+		}
+
+		li {
+				font-size: 13px;
+				margin-top: 3px;
+
+				strong {
+					font-weight: normal;
+					text-decoration:underline;
+					color: #4e4d4d; 
+					font-size: 14px;
+				}
+		}
+	}
+
+	.agree2 {
+
+		p {
+			color: #4d4d4d;
+		}
+	}
+
+	.caution {
+
+		.pop_body {
+				padding-bottom: 37px;
+		}
+
+		li {
+			margin-bottom: 5px;
+
+			&:last-child {
+					margin-bottom: 0;
+			}
+
+			&:before {
+					top: 13px;
+			}
+		}
+	}
+}
+
+.pop_video {
+
+	.video_wrap {
+		position: relative;
+		background: #000;
+		width: 100%;
+		padding-top: 56.2%;
+
+		iframe {
+			@include absolute($top:0, $left:0, $right: 0);
+			width: 100%; height: 100%;
+		}
+	}
+}
+
+.pop_event {
+
+  .msg {
+		font-size:13px;
+		text-align:center;
+		margin-top: 2px;
+	}
+	
+	.id_wrap {
+		position: relative;
+		border: 1px solid #aaa;
+		overflow: hidden;
+		margin-top: 13px;
+
+		input {
+			height: 40px;
+			line-height: 40px;
+			font-size:19px;
+			-webkit-appearance: none;
+			color: #888;
+			text-align: center;
+			border: 0 none;
+			border-radius: 0;
+		}
+
+		.option {
+			@include absolute($top: 0, $left: 0);
+			width: 70px;
+			border-right: 1px solid #aaa;
+		}
+
+		.userid {
+			width: 100%;
+			padding-left: 71px;
+			box-sizing: border-box;
+		}
+	}
+
+    .agree_wrap {
+
+			padding-top: 10px;
+
+			li {
+				position: relative;
+				text-align: left;
+				color:#888;
+				min-height: 19px;
+				font-size: 13px;
+				padding: 1px 0 0 25px;
+				margin-bottom: 6px;
+
+				&:last-child {
+						margin-bottom: 0;
+				}
+			}
+
+			button {
+				color: #4e4d4d;
+				text-decoration:underline;
+			}
+
+			.checkbox {
+				@include absolute($top: 0, $left: 0);
+				@include square(18px);
+				border: 1px solid #aaa;
+
+			&.checked {
+				@include bgImg('bg_checkbox.png');
+				background-size: 100% auto;
+			}
+
+			input {
+				@include absolute($top:0, $left: 0);
+				width: 100%;
+				height: 100%;
+				opacity: 0;
+			}
+		}
+	}
+}
+
+#popShareReg {
+
+	.share_msg {
+		text-align: center;
+		color: #4d4d4d;
+		margin: 10px 0 15px;
+	}
+    
+	.share_btn {
+		$class: btn_video_fb, btn_video_tw, btn_video_copy;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		button {
+			@include square(54px);
+			@include ir('#{$matchdir}spr_share_pop.png');
+			background-size: auto 100%;
+			margin:0 5px;
+		}
+
+		@each $cls in $class { 
+			$i: 1 - index($class, $cls);
+
+			.#{$cls} {
+				background-position: $i * 54+px 0;
+			}
+		}
+	}
+}
+
+#popVote {
+
+	.pop_body {
+		padding-top: 20px;
+	}
+
+	.img {
+		position: relative;
+		display: block;
+		@include square(100px);
+		@include bgImg('#{$matchdir}spr_team_pop.png');
+		background-size: auto 100%;
+		border-radius: 100%;
+		overflow: hidden;
+		background-color: #eee;
+		margin: 0 auto 5px;
+	}
+
+	.team2 {
+		.img {
+			background-position: 100% 0;
+		}
+	}
+}
+
+@keyframes daoBubbleMotion {
+	0% {transform: rotate(0) scale(1)}
+	25% {transform: rotate(2deg) scale(0.98)}
+	50% {transform: rotate(0) scale(1)}
+	75% {transform: rotate(-2deg)  scale(1.02)}
+	100% {transform: rotate(0)}
+}
+
+@keyframes bazziBubbleMotion {
+	0% {transform: rotate(0) scale(1)}
+	25% {transform: rotate(-2deg) scale(1.02)}
+	50% {transform: rotate(0) scale(1)}
+	75% {transform: rotate(-2deg)  scale(0.98)}
+	100% {transform: rotate(0)}
+}
+
+@keyframes vibrateBanner {
+	0% {transform:translate(2px, 1px) rotate(0deg)}
+	10% {transform:translate(-1px, -2px) rotate(-2deg)}
+	20% {transform:translate(1px, 0px) rotate(1deg)}
+	30% {transform:translate(0px, 2px) rotate(0deg)}
+	40% {transform:translate(1px, -1px) rotate(2deg)}
+	50% {transform:translate(-1px, 2px) rotate(-2deg)}
+	60% {transform:translate(1px, 1px) rotate(0deg)}
+	70% {transform:translate(2px, 1px) rotate(-2deg)}
+	80% {transform:translate(-1px, -1px) rotate(0.5deg)}
+	90% {transform:translate(-1px, 2px) rotate(2deg)}
+	100% {transform:translate(1px, -2px) rotate(-2deg)}
+}

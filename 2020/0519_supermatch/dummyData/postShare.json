@@ -1,0 +1,9 @@
+{
+  "emailSubscription": null,
+  "hasUser": false,
+  "mobileSubscription": null,
+  "resultValue": true,
+  "returnCode": 0,
+  "returnMessage": "이벤트 참여가 완료되었습니다.",
+  "setReturnCode": 0
+}
