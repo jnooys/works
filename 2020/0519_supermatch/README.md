@@ -1,4 +1,4 @@
-# 카트러쉬플러스 슈퍼매치 이벤트
+# 카트러쉬+ 슈퍼매치 이벤트
 - PC http://rongchyo.cafe24.com/project/2020/supermatch/kr-launching.html
 - Mobile http://rongchyo.cafe24.com/project/2020/supermatch/kr-launching-mobile.html
 
