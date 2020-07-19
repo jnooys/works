@@ -1,6 +1,6 @@
 # 카트러쉬플러스 슈퍼매치 이벤트
-1. PC http://rongchyo.cafe24.com/project/2020/supermatch/kr-launching.html
-2. Mobile http://rongchyo.cafe24.com/project/2020/supermatch/kr-launching-mobile.html
+- PC http://rongchyo.cafe24.com/project/2020/supermatch/kr-launching.html
+- Mobile http://rongchyo.cafe24.com/project/2020/supermatch/kr-launching-mobile.html
 
 ## specifications
 1. IE11+, Modern Broswer 지원
