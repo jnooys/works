@@ -95,8 +95,8 @@ const addEventInput = () => {
       element.classList.remove('focus');
     }
   };
-  const onChange = (v) => () => {
-    v.value = element.value.replace(/[^0-9]/g, '');
+  const onChange = (element) => () => {
+    element.value = element.value.replace(/[^0-9]/g, '');
   };
 
   Array.from(userValue).forEach((e) => {
