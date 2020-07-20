@@ -1,7 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const polyfillsPC = ['@babel/polyfill', 'whatwg-fetch', 'element-closest-polyfill', 'custom-event-polyfill', 'formdata-polyfill'];
+const polyfillsPC = ['@babel/polyfill', 'whatwg-fetch', 'element-closest-polyfill', 'formdata-polyfill'];
 const polyfillsMobile = ['@babel/polyfill', 'whatwg-fetch'];
 
 module.exports = {
@@ -21,6 +21,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist/js'),
+    publicPath: '/dist/js',
     filename: '[name].js',
   },
   plugins: [

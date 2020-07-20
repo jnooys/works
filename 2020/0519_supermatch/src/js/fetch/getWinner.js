@@ -7,7 +7,7 @@ const drawPercent = (per, win) => {
   const count = [Math.ceil(per[0].value / per[1].value), 1];
   const isPerLoaded = voteElement.classList.contains(activeClass);
   Array.from(graphElement).forEach((v) => {
-    v.style = '';
+    Object.assign(v.style, { width: '', transition: '' });
   });
   voteElement.classList.remove(activeClass);
 
@@ -63,10 +63,10 @@ const setValue = (res) => {
       const name = v;
       const value = Math.round(res[v]);
       stateElement.querySelector(`[data-name=${name}]`).innerText = value;
-      grahElement.querySelector(`[data-name=${name}]`).style = {
+      Object.assign(grahElement.querySelector(`[data-name=${name}]`).style, {
         width: `${value}%`,
         transition: 'width 0ms linear',
-      };
+      });
       a.push({ name, value });
     }
     return a;
@@ -92,7 +92,7 @@ const setValue = (res) => {
   drawPercent(per, win);
 };
 
-const getWinner = (done) => {
+const getWinner = () => {
   // 더미데이터 받아오기
   fetch('http://rongchyo.cafe24.com/project/2020/supermatch/dummyData/getVote.json', {
     method: 'GET',

@@ -95,8 +95,8 @@ const addEventInput = () => {
       element.classList.remove('focus');
     }
   };
-  const onChange = (element) => () => {
-    element.value = element.value.replace(/[^0-9]/g, '');
+  const onChange = (v) => () => {
+    v.value = element.value.replace(/[^0-9]/g, '');
   };
 
   Array.from(userValue).forEach((e) => {
@@ -172,7 +172,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 window.fbAsyncInit = function () {
   window.FB.init({
-    appId: '1105163022877731',
+    appId: '594554644590734',
     xfbml: true,
     version: 'v6.0',
   });

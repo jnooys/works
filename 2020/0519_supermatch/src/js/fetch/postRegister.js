@@ -150,7 +150,7 @@ const addEventVote = () => {
 // share event
 const addEventShare = () => {
   const shareForm = document.querySelector('#shareForm');
-  const shareButton = document.querySelectorAll('.share_btn button');
+  const shareButton = document.querySelectorAll('button[data-tag]');
   // register share
   const registerShare = (formData, tag) => {
     const userInfo = `${formData.get('option')}${formData.get('userid')}`;

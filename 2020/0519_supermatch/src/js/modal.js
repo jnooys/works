@@ -63,10 +63,9 @@ const modal = (() => {
     if (modalElement.classList.contains('pop_register')) {
       const input = modalElement.querySelector('input[name=userid]');
       const checkbox = modalElement.querySelectorAll('input[name=agree]');
-      const changeEvent = new Event('change', { bubbles: true, cancelable: true });
       Array.from(checkbox).forEach((v) => {
         v.checked = false;
-        v.dispatchEvent(changeEvent);
+        v.parentElement.classList.remove('checked');
       });
       input.classList.remove('focus');
       input.value = '';
