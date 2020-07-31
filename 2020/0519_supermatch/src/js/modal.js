@@ -19,19 +19,19 @@ const modal = (() => {
   })();
 
   const openCallback = (modalID, data) => {
+    const modalElement = document.querySelector(`#${modalID}`);
     switch (modalID) {
       case 'popVideo': {
         const host = 'https://www.youtube.com/embed/';
         const param = '?rel=0&amp;showinfo=0&amp;autoplay=1';
         const { url } = data;
-        const video = document.querySelector(`#${modalID} iframe`);
+        const video = modalElement.querySelector('iframe');
         video.setAttribute('src', `${host}${url}${param}`);
         break;
       }
       case 'popVote': {
         const { team } = data;
         const teamName = team === 1 ? 'TEAM 다오' : 'TEAM 배찌';
-        const modalElement = document.querySelector(`#${modalID}`);
         const teamElement = document.querySelectorAll('.modalpop .team');
         const teamInput = modalElement.querySelector('input[name=teamnumber]');
         teamInput.value = team;
@@ -50,15 +50,23 @@ const modal = (() => {
 
   const closeCallback = (modalID) => {
     const modalElement = document.querySelector(`#${modalID}`);
-
-    if (modalID === 'popAlert') {
-      const textElement = modalElement.querySelector('.alert_wrap');
-      textElement.innerHTML = '';
-      if (fetchVote) {
-        getWinner();
-        fetchVote = null;
+    switch (modalID) {
+      case 'popVideo': {
+        const video = modalElement.querySelector('iframe');
+        video.setAttribute('src', '');
+        return;
       }
-      return;
+      case 'popAlert': {
+        const textElement = modalElement.querySelector('.alert_wrap');
+        textElement.innerHTML = '';
+        if (fetchVote) {
+          getWinner();
+          fetchVote = null;
+        }
+        return;
+      }
+      default:
+        break;
     }
     if (modalElement.classList.contains('pop_register')) {
       const input = modalElement.querySelector('input[name=userid]');
