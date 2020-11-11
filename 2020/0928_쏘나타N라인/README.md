@@ -1,7 +1,7 @@
-# 카러플스타컵
+# 쏘나타 N 라인
 
-https://kartrush.nexon.com/event01_200928-launching?spot=1
-https://kartrush.nexon.com/event02_200928-launching?spot=1
+- PC http://rongchyo.cafe24.com/project/2020/sonata/event01.html
+- Mobile http://rongchyo.cafe24.com/project/2020/sonata/event02.html
 
 ## specifications
 
