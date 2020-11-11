@@ -1,0 +1,1040 @@
+@charset "utf-8";
+
+// variables
+@import './utils/variables';
+$dir: 'https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200928/images_328F3B4383060A5B/event02_06A2/';
+$max-width: 1600px;
+
+// mixins
+@import './utils/mixins';
+
+// functions
+@import './utils/functions';
+
+// reset
+@import './base/reset';
+
+// modules
+@import './modules/lnb';
+@import './modules/modal';
+
+body {
+  background: #fff;
+  color: #4e4d4d;
+}
+
+/* layout */
+#wrap {
+  position :relative;
+  overflow: hidden;
+}
+
+#screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: #000;
+
+  &.hide {
+    opacity: 0;
+    transition: opacity 500ms linear;
+  }
+}
+
+/* common */
+section {
+  position: relative;
+  max-width: 1920px;
+  margin: 0 auto;
+
+  .bg_section {
+
+    @include absolute($top: 0, $left: 0, $bottom: 0);
+    width: 100%;
+  }
+
+  &:not(.intro) {
+
+    .bg_section {
+      background-size: 100% auto !important;
+    }
+  }
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  
+  .bg_container {
+    @include absolute($top: 0, $bottom: 0, $left:0);
+    width: getPer(1600);
+  }
+}
+
+.btn_register {
+  $width: 580;
+
+  display: block;
+  max-width: $width+px;
+  @include paddingTop(getPer(103, $width));
+  @include bgImg('btn_register.png');
+  background-size: 100% auto;
+}
+
+.char {
+  @include absolute;
+}
+
+/* intro */
+.intro {
+  box-sizing: border-box;
+  overflow: hidden;
+
+  $obj: 'p, h2, .btn_register';
+
+  #{$obj} {
+    opacity: 0;
+  }
+
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bg_pattern {
+    @include absolute($top: 0, $left: 0);
+    width: 100%;
+    height: 100%;
+    background:url('#{$dir}bg_pattern.png') repeat;
+    opacity: 0.25;
+  }
+
+  .bg_section {
+    @include bgImg('bg_intro.jpg', center top);
+
+    background-color: #050409;
+    background-size: auto 100%;
+  }
+
+  video {
+    @include absolute($top: 0, $left: 50%);
+  }
+
+  .title_wrap {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    padding: 2% 0;
+
+    h2 {
+      $width: 710;
+
+      max-width: $width+px;
+      @include paddingTop(getPer(539, $width));
+      @include bgImg('h2.png');
+      background-size: 100% auto;
+      margin:0 auto;
+      transform: scale(0);
+    }
+
+    p {
+      $width: 589;
+
+      max-width: $width+px;
+      @include paddingTop(getPer(58, $width));
+      @include bgImg('txt_headline_sub.png');
+      background-size: 100% auto;
+      margin: 0 auto getPer(92);
+    }
+  }
+
+  .btn_scroll {
+    $width: 97;
+
+    @include absolute($left: 50%);
+    max-width: $width+px;
+    @include paddingTop(getPer(44, $width));
+    @include bgImg('btn_scroll.png');
+    background-size: 100% auto;
+    animation: scrolling 2s infinite linear;
+  }
+
+  .btn_register {
+    transform: translateY(20px);
+  }
+
+  .load & {
+
+    #{$obj} {
+      opacity: 1;
+    }
+
+    h2 {
+      transform: scale(1);
+      transition: opacity 300ms ease, transform 2s cubic-bezier(0, 0.7, 0.2, 1);
+    }
+
+    p {
+      transition: opacity 500ms linear;
+      transition-delay: 600ms;
+    }
+
+    .btn_register {
+      transform: translateY(0);
+      transition: opacity 300ms ease, transform 500ms ease;
+      transition-delay: 300ms;
+    }
+  }
+}
+
+/* content1 */
+.content1 {
+
+  .officer {
+      
+    .bg_section {
+      @include bgImg('bg_officer.png', center top);
+      background-color: #3c57a0;
+    }
+
+    .link {
+      @include absolute;
+    }
+  }
+
+  .general {
+
+    .bg_section {
+      @include bgImg('bg_general.png', center top);
+      background-color: #36206f;
+    }
+  }
+}
+
+/* content2 */
+.content2 {
+
+  .tab_wrap {
+    position: relative;
+
+    @each $cls, $color in (officer: #3c57a0 , general: #36206f) {
+
+      .nav a.#{$cls} {
+
+        &.active {
+          background-color: $color;
+        }
+      }
+      
+      .tab_content.#{$cls} {
+
+        .bg_section {
+          @include bgImg('bg_tab_#{$cls}.jpg');
+          background-color: $color;
+        }
+      }
+    }
+  }
+
+  .nav {
+
+    ul {
+      max-width: 900px;
+      display: flex;
+      margin: 0 auto;
+    }
+
+    li {
+      position: relative;
+      width: 50%;
+      background-color: #c6c6c6;
+
+      a {
+        @include absolute($bottom: 0, $left: 0);
+        width: 100%;
+        height: getPer(120, 100);
+        background-size: 100% auto;
+        
+        &.active {
+          background-position-y: 100%;
+        }
+      }
+    }
+  }
+
+  .tab_content {
+    position: relative;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  .policy_wrap {
+
+    @include absolute($left: 0, $bottom: 0);
+    width: 100%;
+
+    .agree_box {
+      $width: 550;
+
+      position: relative;
+      margin: 0 auto;
+
+      width: getPer($width);
+
+      .checkbox {
+        position: relative;
+        width: getPer(30, $width);
+        box-sizing: border-box;
+        @include paddingTop(100%);
+
+        input {
+          @include absolute($top: 0, $left: 0);
+          width: 100%;
+          height: 100%;
+          background: #fff;
+        }
+      }
+
+      label {
+        @include absolute($top: 0, $right: 0);
+        width: 94.55%;
+        height: 100%;
+        @include bgImg('label_agree_policy.png', 0 50%);
+        background-size: 100% auto;
+      }
+    }
+  }
+}
+
+/* aside */
+aside {
+  position: fixed;
+  z-index: 99;
+  background: #000;
+
+  div {
+    position: relative;
+  }
+
+  ul {
+
+    li {
+      position: relative;
+    }
+
+    a {
+      display: block;
+      position: relative;
+    }
+  }
+
+  .btn_top {
+    @include absolute;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 300ms ease;
+    
+    &.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+/* footer */
+footer {
+  position: relative;
+  width: 100%;
+  text-align: center;
+
+  .copyright {
+    position: relative;
+    color: #000;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  img {
+    height: 1.75em;
+    margin-top: 0.67em;
+  }
+
+  span {
+    margin: 0 10 / 12 * 1em;
+  }
+
+  .btn_policy {
+    border: 1px solid #000;
+    padding: 5 / 12 * 1em 8 / 12 * 1em;
+  }
+}
+
+@include desktop {
+
+  .container {
+    max-width: $max-width;  
+  }
+
+  .bg_container {
+    background-size: 100% auto !important;
+  }
+
+  .char {
+
+    span {
+      @include absolute;
+      background-size: 100% auto !important;
+    }
+
+    .body {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .btn_register {
+    width: getPer(580);
+  }
+
+  .intro {
+
+    .container {
+      height: 100vh;
+    }
+    
+    .title_wrap {
+
+      h2 {
+        width: getPer(710);
+      }
+
+      p {
+        width: getPer(589);
+      }
+    }
+
+    .btn_register {
+      margin: getPer(38) auto getPer(26);
+    }
+    
+    .btn_scroll {
+      $width: 97;
+
+      width: getPer($width);
+      bottom: getPer(40, 1080);
+      margin-left: getPer($width) * -0.5;
+    }
+  }
+
+  .content1 {
+
+    .schedule {
+      $height: 558;
+  
+      .container {
+        @include paddingTop(getPer($height));
+      }
+      
+      .bg_container {
+        @include bgImg('bg_cnt_schedule.png', center top);
+      }
+  
+      .dizini {
+        $char-width: 268;
+  
+        top: getPer(128, $height);
+        left: getPer(1512);
+        width: getPer($char-width);
+        @include paddingTop(getPer(386, $char-width));
+  
+        .body {
+          @include bgImg('bg_dizini_body.png');
+        }
+  
+        .shadow {
+          $shadow-width: 92;
+  
+          bottom: getPer(-4, $height);
+          left: getPer(48, $char-width);
+          width: getPer($shadow-width, $char-width);
+          @include paddingTop(getPer(30, $shadow-width));
+          @include bgImg('bg_dizini_shadow.png');
+        }
+      }
+    }
+  
+    .officer {
+      $height: 2270;
+    
+      .container {
+        @include paddingTop(getPer($height));
+        margin-bottom: getPer(100);
+      }
+    
+      .bg_container {
+        @include bgImg('bg_cnt_officer.png');
+      }
+    
+      .link {
+        top: getPer(1922, $height);
+        left: getPer(494);
+        width: getPer(66);
+        @include paddingTop(getPer(36, 66));
+      }
+    
+      .lodumani {
+        $char-width: 232;
+        $char-height: 374;
+    
+        top: getPer(813, $height);
+        left: getPer(-122);
+        width: getPer($char-width);
+        @include paddingTop(getPer($char-height, $char-width));
+    
+        .body {
+          @include bgImg('bg_lodumani_body.png');
+        }
+    
+        .shadow {
+          left: getPer(4, $char-width);
+          bottom: getPer(-13, $char-height);
+          $shadow-width: 206;
+    
+          width: getPer($shadow-width, $char-width);
+          @include paddingTop(getPer(36, $shadow-width));
+          @include bgImg('bg_lodumani_shadow.png');
+        }
+      }
+    
+      .ethi {
+        $char-width: 274;
+        $char-height: 393;
+    
+        top: getPer(1647, $height);
+        left: getPer(1437); 
+        width: getPer($char-width);
+        @include paddingTop(getPer($char-height, $char-width));
+    
+        .body {
+          @include bgImg('bg_ethi_body.png');
+        }
+    
+        .shadow {
+          left: getPer(31, $char-width);
+          bottom: getPer(-11, $char-height);
+          $shadow-width: 191;
+    
+          width: getPer($shadow-width, $char-width);
+          @include paddingTop(getPer(32, $shadow-width));
+          @include bgImg('bg_ethi_shadow.png');
+        }
+      }
+    }
+
+    .general {
+      $height: 2330;
+      .container {
+        @include paddingTop(getPer(2330));
+      }
+  
+      .bg_container {
+        @include bgImg('bg_cnt_general.png');
+      }
+  
+      .marid {
+        $char-width: 216;
+        $char-height: 332;
+  
+        top: getPer(1031, $height);
+        left: getPer(-116); 
+        width: getPer($char-width);
+        @include paddingTop(getPer($char-height, $char-width));
+  
+        .body {
+          @include bgImg('bg_marid_body.png');
+        }
+  
+        .shadow {
+          left: getPer(42, $char-width);
+          bottom: getPer(-10, $char-height);
+          $shadow-width: 133;
+  
+          width: getPer($shadow-width, $char-width);
+          @include paddingTop(getPer(34, $shadow-width));
+          @include bgImg('bg_marid_shadow.png');
+        }
+      }
+  
+      .bazzi {
+        $char-width: 255;
+        $char-height: 344;
+  
+        top: getPer(1818, $height);
+        left: getPer(1444); 
+        width: getPer($char-width);
+        @include paddingTop(getPer($char-height, $char-width));
+  
+        .body {
+          @include bgImg('bg_bazzi_body.png');
+        }
+  
+        .shadow {
+          left: getPer(50, $char-width);
+          bottom: getPer(-11, $char-height);
+          $shadow-width: 107;
+  
+          width: getPer($shadow-width, $char-width);
+          @include paddingTop(getPer(27, $shadow-width));
+          @include bgImg('bg_bazzi_shadow.png');
+        }
+      }
+    }
+  }
+
+  .content2 {
+
+    > .container {
+      @include paddingTop(getPer(421));
+      
+      .bg_container {
+        @include bgImg('bg_cnt_content2.png');
+      }
+    }
+
+    @each $cls in (officer , general) {
+
+      a.#{$cls} {
+        @include bgImg('bg_tab_nav_#{$cls}.png');
+      }
+
+      .tab_content.#{$cls} {
+
+        .bg_container {
+          @include bgImg('bg_cnt_tab_#{$cls}.png');
+        }
+      }
+    }
+
+    .nav {
+
+      ul {
+        width: getPer(900);
+        margin-top: getPer(-100);
+      }
+
+      li {
+        @include paddingTop(getPer(100, 450));
+      }
+    }
+
+    .tab_content {
+      
+      .container {
+        @include paddingTop(getPer(1600));
+      }
+    }
+
+    .policy_wrap {
+
+      .agree_box {
+        width: getPer(550);
+      }
+
+      button {
+        margin: getPer(18) auto getPer(135);
+      }
+    }
+  }
+
+  aside {
+    top: 7%;
+    right: 30px;
+    width: 160px;
+
+    a {
+      @include bgImg('spr_aside.png');
+
+      &:hover {
+        background-position-x: -160px;
+      }
+    }
+
+    li {
+
+      &.active {
+
+        > a {
+          background-position-x: -160px;
+        }
+      }
+    }
+
+    div > ul > li {
+
+      &.active, &:hover {
+
+        &:before {
+          @include absolute($top: 0, $left: 0, $right: 0, $bottom: 0);
+          content: "";
+          border: 4px solid #ff9406;
+          background-color: #0f141d;
+        }
+      }
+
+      & {
+
+        > a {
+          height: 80px;
+        }
+      }
+    }
+
+    .nav2 {
+      padding-bottom: 26px;
+      
+      > a {
+        height: 70px;
+      }
+
+      li {
+
+        &:first-child {
+          margin-bottom: 8px;
+        }
+
+        a {
+          height: 22px;
+        }
+      }
+    }
+
+    @for $i from 1 through 3 {
+
+      .nav#{$i} {
+
+        > a {
+          $pos: (1 - $i) * 80;
+          background-position-y: if($i > 2, $pos+ 10, $pos)+px;
+        }
+      }
+    }
+
+    @for $j from 1 through 2 {
+      
+      .nav2_#{$j} {
+
+        a {
+          background-position-y: (1 - $j) * 22 - 339px;
+        }
+      }
+    }
+
+    .nav4 a {
+      height: 90px;
+      background-position-y: -230px;
+    }
+
+    .btn_top {
+      top: 100%;
+      left: 34px;
+      width: 93px;
+      height: 81px;
+      background-position-y: -419px;
+      margin-top: 20px;
+    }
+  }
+
+  footer {
+
+    .copyright {
+      display: flex;
+      margin: getPer(70) 0;
+    }
+  }
+}
+
+@include tablet {
+  $width: 750;
+  $header-height: 50px;
+
+  section:not(.intro) {
+    padding-top: $header-height;
+
+    > .bg_section {
+      top: $header-height;
+    }
+  }
+
+  section:not(:last-child), .content1 {
+    margin-bottom: $header-height * -1;
+  }
+
+  .container {
+    max-width: $width+px;
+
+    .bg_container {
+      left: 0;
+      width: 100%;
+    }
+  }
+  
+  .intro {
+
+    .container {
+      min-height: 100vmax;
+      padding: $header-height 0 getPer(80, $width);
+    }
+
+    .title_wrap {
+
+      h2 {
+        width: getPer(618, $width);
+      }
+      
+      .btn_register {
+        width: getPer(514, $width);
+        margin: getPer(34, $width) auto getPer(20, $width);
+      }
+
+      p {
+        width: getPer(521, $width);
+      }
+    }
+
+    .btn_scroll {
+      bottom: 2.83%;
+      width: getPer(77, $width);
+      margin: 0 0 getPer(80, $width) getPer(77, $width) * -0.5;
+    }
+  }
+
+  .content1 {
+
+    .schedule {
+
+      .container {
+        @include paddingTop(getPer(667, $width));
+      }
+      
+      .bg_container {
+        @include bgMobile('bg_cnt_schedule.png');
+      }
+    }
+  
+    .officer {
+  
+      .bg_section {
+        background-color: #3c57a0;
+      }
+  
+      .container {
+        @include paddingTop(getPer(4180, $width));
+        margin-bottom: getPer(50, $width);
+      }
+      
+      .bg_container {
+        @include bgMobile('bg_cnt_officer.png');
+      }
+
+      .link {
+        top: getPer(3939, 4180);
+        left: getPer(508, $width);
+        width: getPer(90, $width);
+        @include paddingTop(getPer(55,90));
+      }
+    }
+
+    .general {
+
+      .container {
+        @include paddingTop(getPer(4559, $width));
+      }
+      
+      .bg_container {
+        @include bgMobile('bg_cnt_general.png');
+      }
+    }
+  }
+
+  .content2 {
+
+    > .container {
+      @include paddingTop(getPer(349, $width));
+
+      .bg_container {
+        @include bgMobile('bg_cnt_content2.png');
+      }
+    }
+
+    .tab_wrap {
+
+      @each $cls in (officer, general) {
+
+        .nav a.#{$cls} {
+          background-image: url('#{$dir}mobile/bg_tab_nav_#{$cls}.png');
+        }
+
+        .tab_content.#{$cls} {
+
+          .bg_container {
+            @include bgMobile('bg_cnt_tab_#{$cls}.png');
+          }
+        }
+      }
+
+      .nav {
+        
+        ul {
+          width: getPer(700, $width);
+          margin-top: getPer(-100, $width);
+        }
+
+        li {
+          @include paddingTop(getPer(100, 350));
+        }
+      }
+    }
+
+    .tab_content {
+
+      .container {
+        @include paddingTop(getPer(1600, $width)); 
+      }
+      
+      &.officer {
+
+        .bg_container {
+          @include paddingTop(getPer(1600, $width)); 
+        }
+      }
+    }
+
+    .policy_wrap {
+
+      .agree_box {
+        width: getPer(540, $width);
+      }
+
+      .btn_register {
+        width: getPer(580, $width);
+        margin: getPer(17, $width) auto getPer(102, $width);
+      }
+    }
+  }
+  
+  aside {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+    .btn_top {
+      bottom: 100%;
+      right: 0;
+      width: getPer(93, $width);
+      @include paddingTop(getPer(81, 93));
+      @include bgMobile('btn_top.png');
+      margin: 0 getPer(10, $width) getPer(10, $width) 0;
+    }
+
+    ul {
+      display: flex;
+
+      .active {
+        z-index: 1;
+
+        > a {
+          background-position-y: 100% !important;
+        }
+      }
+
+      a {
+        @include paddingTop(getPer(80, 150));
+      }
+    }
+
+    div {
+      width: 100%;
+      max-width: $width+px;
+      margin: 0 auto;
+
+      > ul {
+        width: 100%;
+        max-width: 750px;
+        margin:0 auto;
+
+        > li:not(.nav2) {
+          width: 20%;
+        }
+      }
+    }
+
+    .depth2 {
+      width: 50%;
+    }
+
+    .nav2 {
+
+      > a {
+        display: none;
+      }
+      width: 40%;
+    }
+
+    @for $i from 1 through 4 {
+      .nav#{$i} {
+
+        > a {
+          @include bgMobile('txt_nav#{$i}.png');
+        }
+      }
+
+      .nav2_#{$i} {
+
+        > a {
+          @include bgMobile('txt_nav2_#{$i}.png');
+        }
+      }
+    }
+  }
+
+  footer {
+
+    .copyright {
+      font-size: 9px;
+      line-height: 14px;
+      margin: getPer(30, $width) 0 getPer(200, $width);
+
+      img {
+        display: block;
+        height: 18px;
+        margin: 0 auto 2px;
+      }
+
+      a {
+        display: inline-block;
+        padding: 0 5px;
+      }
+    }
+  }
+}
+
+@keyframes scrolling {
+  0% {transform: translateY(-20px);opacity: 0}
+  50% {transform: translateY(-10px);opacity: 1}
+  60% {transform: translateY(-5px);opacity: 1}
+  85% {transform: translateY(0);opacity: 0}
+  100% {transform: translateY(0);opacity: 0}
+}

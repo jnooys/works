@@ -1,0 +1,92 @@
+@import './variables';
+
+// mixin
+@mixin absolute($top: null, $right: null, $bottom: null, $left: null) {
+	position: absolute;
+	top: $top;
+	right: $right;
+	left: $left;
+	bottom: $bottom;
+}
+
+@mixin clearfix {
+	*zoom: 1;
+
+	&:after {
+			content : "";
+			display: block;
+			clear: both;
+	}
+}
+
+@mixin ir ($file: null) {
+	display: block;
+	text-indent: -99999px;
+	overflow: hidden;
+	@if($file) {
+			background: url('#{$dir}#{$file}') no-repeat;
+	}
+}
+
+@mixin square ($value) {
+	width: $value;
+	height: $value;
+}
+
+@mixin bgSection ($file, $top: 0, $bottom: 0) {
+	&:before {
+			@include absolute($top: $top, $bottom: $bottom, $left: 0);
+			content: "";
+			width: 99.99%;
+			background:url('#{$dir}#{$file}') center top no-repeat;
+			padding-left: 0.01%;
+	}
+}
+
+@mixin bgImg ($file, $position: 0 0) {
+	background: url('#{$dir}#{$file}') $position no-repeat;
+}
+
+@mixin bgImgSize ($file, $position: 0 0, $size: 100% auto) {
+	background-image: url('#{$dir}#{$file}');
+	background-position: $position;
+	background-repeat: no-repeat;
+	background-size: $size;
+}
+
+@mixin bgMobile($file, $position: 0 0, $size: 100% auto) {
+	background: url('#{$dir}mobile/#{$file}') $position no-repeat;
+	background-size: $size;
+}
+
+@mixin paddingTop($value) {
+	&:before {
+		content : "";
+		display: block;
+		width: 100%;
+		padding-top: $value;
+	}
+}
+
+@mixin widthPer($val: 100) {
+	width: $val *1%;	
+}
+
+// responsive
+@mixin desktop {
+  @media (min-width: #{$breakpoint-desktop + 1}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}

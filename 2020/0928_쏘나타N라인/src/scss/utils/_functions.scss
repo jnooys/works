@@ -1,0 +1,5 @@
+@import './variables';
+
+@function getPer ($dividend, $divisor: $max-width / ($max-width * 0 + 1)) {
+	@return ceil($dividend / $divisor * 100000) / 1000 * 1%;
+}

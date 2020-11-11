@@ -1,0 +1,797 @@
+@function em($size, $value: 15) {
+  @return  #{ceil($size / $value * 100) / 100 }em;
+}
+
+.modal {
+
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 500;
+  transition: opacity 200ms ease;
+  letter-spacing: -1px;
+  background: rgba(0, 0, 0, 0.8);
+  word-break: keep-all;
+  line-height: 1.25;
+
+  .modal_wrap {
+    @include absolute($top:0, $left: 0);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    padding: 2% 0;
+  }
+
+  &.show {
+    display: block;
+    opacity: 0;
+  }
+
+  &.fadein {
+    opacity: 1;
+  }
+
+  .modal_container {
+    
+    position: relative;
+    width: 92%;
+    margin: auto;
+  }
+
+  .modal_content {
+    
+    position: relative;
+    background: #fff;
+    box-sizing: border-box;
+    border: 5px solid #2e3191;
+    
+    .underline {
+      text-decoration: underline;
+    }
+  }
+
+  .modal_button {
+
+    display: flex;
+    justify-content: center;
+
+    button {
+      font-size: 28px;
+      color: #fff;
+      height: 70px;
+      width: 49%;
+      font-weight: bold;
+      line-height: 1;
+      margin: 0 1%;
+    }
+
+    .btn_cancel {
+      max-width: 170px;
+      background: #888;
+    }
+
+    .btn_confirm {
+      background: #2e3191;
+    }
+  }
+
+  h2, h3 {
+    color: #2e3191; 
+  }
+
+  h2 {
+    text-align: center;
+    letter-spacing: -2px;
+  }
+
+  .modal_content {
+
+    > h2 {
+      font-size: 50px;
+
+    }
+  }
+
+  .btn_x {
+    display: block;
+    position: relative;
+    width: 48px;
+    @include bgImg('btn_modal_close.png');
+    background-size: 100% auto;
+    @include paddingTop(120%);
+    margin: 0 auto;
+  }
+
+  .modal_body {
+    width: 90%;
+    margin:0 auto;
+  }
+}
+
+.modal_alert, .modal_840 {
+
+  h2, p {
+    padding: 0 4%;
+  }
+
+  p {
+    font-size: 22px;
+  }
+}
+
+.modal_type {
+  $width: 690;
+  $body-width: 510;
+
+  .modal_container {
+    max-width: $width+px;
+  }
+
+  .modal_content {
+    @include bgImg('bg_modal_type.jpg', center top);
+    background-size: 100% auto;
+    background-color: #050509;
+    padding: getPer(350, $width) 0 getPer(72, $width);
+  }
+
+  h2 {
+    color: #fff;
+    margin-bottom: getPer(33, $width);
+  }
+
+  .modal_body {
+    max-width: $body-width+px;
+  }
+
+  .form {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .field {
+    width: getPer(250, $body-width);
+    color: #999;
+    text-align: center;
+    display: flex;
+
+    label {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      border-radius: 15px;
+      background: #3d4655;
+      border: 5px solid;
+      cursor: pointer;
+      padding: getPer(50, 250) 0 getPer(16, 250);
+    }
+
+    .caution {
+      padding: 0 5%;
+    }
+
+    input:checked + label {
+      color: #fff;
+    }
+
+    &.Type1 { 
+
+      input:checked + label {
+        border-color: #86c0ff;
+        background: #1e7ce3;
+      }  
+    }
+
+    &.Type2 { 
+
+      input:checked + label {
+        border-color: #ff8976;
+        background: #e3491e;
+      }  
+    }
+
+    span {
+      display: block;
+    }
+
+    .part {
+      font-size: 40px;
+      margin-bottom: getPer(30, 250);
+
+      strong {
+        display: block;
+      }
+    }
+  }
+
+  .modal_button {
+
+    button {
+      width: 240px;
+    }
+  }
+
+  .ps {
+    color: #6a6cad;
+    text-align: center;
+    margin-top: getPer(10, $width);
+  }
+
+  .modal_button {
+    margin-top: getPer(30, $body-width);
+  }
+}
+
+.modal_register {
+  $width: 730;
+  $body-width: 532;
+
+  @mixin placeholder {
+    color: #aaa;
+  }
+  
+  .modal_container {
+    max-width: $width+px;
+  }
+
+  .modal_content {
+    padding: getPer(65, $width) 0 getPer(75, $width);
+  }
+
+  .modal_body {
+    max-width: $body-width+px;
+  }
+
+  h2 {
+    margin-bottom: getPer(40, $width);
+
+    span {
+      font-size: 0.7em;
+      display: block;
+
+      &.Type1 {
+        color: #1e7ce3;
+      }
+
+      &.Type2 {
+        color: #e3491e;
+      }
+    }
+  }
+
+  h3, .field label {
+    font-size: 22px;
+    margin-bottom: getPer(7, $body-width);
+  }
+
+  .form {
+
+    input[type=text], textarea {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #aaa;
+      background: #fff;
+      font-size: 20px;
+
+      &::placeholder {
+        @include placeholder;
+      }
+
+      &:-ms-input-placeholder {
+        @include placeholder;
+      }
+
+      &::-ms-clear {
+        display: none;
+      }
+    }
+  }
+
+  .field_cert {
+    $input-width: 490;
+
+    border: 1px solid #aaa;
+    padding: getPer(20, $body-width);
+
+    div {
+      display: flex;
+
+      label {
+        width: getPer(136, $input-width);
+        color: #aaa;
+        padding: 0 getPer(10, $input-width);
+      }
+
+      font-size: 18px;
+      margin-top: getPer(6, $input-width);
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    input[type=text] {
+      border: 0;
+      font-size: inherit;
+      color: #aaa;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      height: 40px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #2e3191;
+      color: #fff;
+      margin-bottom: getPer(19, $input-width);
+
+      .icon {
+        display: inline-block;
+        width: 18px;
+        height: 100%;
+        @include bgImg('btn_cert_disabled.png');
+        vertical-align: middle;
+        margin-left: 4px;
+      }
+
+      &:disabled {
+        background: #616161;
+        cursor: default;
+      }
+    }
+  }
+
+  .formtype {
+
+    input[type=text] {
+      height: em(58, 20);
+      padding: 0 getPer(28, $body-width);
+    }
+  }
+
+  .field {
+    position: relative;
+    margin-top: getPer(16, $body-width);
+
+    > label {
+      display: inline-block;
+      color: #2e3191;
+      font-weight: bold;
+    }
+
+    div {
+      display: flex;
+      flex-flow: wrap;
+      justify-content: space-between;
+
+      input[type=text] {
+        width: 49.05%;
+        margin-bottom: 1.9%;
+      }
+    }
+
+    textarea {
+      font-size: 18px;
+      min-height: 5.6em;
+      line-height:1.25;
+      padding: getPer(22, $body-width) getPer(28, $body-width);
+    }
+
+    .btn_NPSN {
+      @include absolute($top: 0, $right: 0);
+      text-decoration: underline;
+      background: none;
+      color: #2e3191;
+      font-weight: bold;
+      font-size: 16px;
+      white-space: nowrap;
+      margin-top: 1.316%;
+    }
+
+    li {
+      color: #000;
+      word-break: keep-all;
+      white-space: normal;
+      font-size: 14px;
+      text-indent: -7px;
+      padding-left: 7px;
+    }
+
+    p {
+      color: #6a6cad;
+      margin-top: getPer(4, $body-width);
+      padding-left: 17px;
+      text-indent: -17px;
+      word-break: keep-all;
+    }
+  }
+
+  .agree_list {
+    width: 290px;
+    margin: getPer(20, $body-width) auto;
+
+    li {
+      display: flex;
+      
+      min-height: 18px;
+      flex-flow: wrap;
+      margin-bottom: 9px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      input {
+        @include square(18px);
+        border-color: #aaa;
+        flex: none;
+      }
+
+      label {
+        color: #888;
+        padding: 0 5px;
+      }
+      
+      button {
+        background: none;
+        text-decoration: underline;
+        color: #4e4d4d;
+        line-height: 18px;
+        font-size: inherit;
+      }
+    }  
+  }
+
+  .modal_button {
+
+    .btn_confirm {
+      max-width: 210px;
+    }
+  }
+}
+
+.modal_npsn {
+  $width: 650;
+  $body-width: 520;
+
+  .modal_container {
+    max-width: $width+px;
+  }
+
+  .modal_content {
+    padding: getPer(75, $width) 0;
+  }
+
+  .modal_body {
+    max-width: $body-width+px;
+  }
+
+  h2 {
+    font-size: 30px;
+    margin: getPer(30, $body-width) 0 getPer(10, $body-width);
+  }
+
+  p {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  img {
+    @include widthPer(100);
+  }
+}
+
+.modal_alert {
+  $width: 460;
+
+  .modal_container {
+    max-width: $width+px;
+  }
+
+  .modal_content {
+    padding: getPer(75, $width) 0;
+  }
+
+  .alert_wrap {
+    text-align: center;
+    word-break: keep-all;
+    margin-bottom: getPer(27, $width);
+  }
+
+  h2 {
+    font-size: 36px;
+    margin-bottom: getPer(8, $width);
+  }
+  
+  .modal_button {
+
+    button {
+      max-width: 190px;
+    }
+  }
+}
+
+.modal_agree1 {
+  $width: 730;
+  $body-width: 532;
+
+  .modal_container {
+    max-width: $width+px;
+  }
+
+  .modal_content {
+    padding: getPer(65, $width) 0 getPer(75, $width);
+  }
+
+  .modal_body {
+    max-width: $body-width+px;
+
+    > div:last-child {
+      border-top: 1px dashed #A6A6A6;
+      margin-top: getPer(39, $body-width);
+      padding-top: getPer(31, $body-width);
+
+      th {
+        font-size: 20px;
+      }
+
+      td {
+        font-size: 17px;
+      }
+    }
+  }
+  
+  [data-type^="Type"] {
+    display: none;
+  }
+
+  h2 {
+    font-size: 42px;
+
+    & + p {
+      color: #6a6cad;
+      font-size: 20px;
+      margin: getPer(11, $body-width) 0;
+    }
+  }
+
+  table {
+    width: 100%;
+    border: 1px solid #aaa;
+    table-layout: fixed;
+
+    th, td {
+      border:1px solid #aaa;
+      word-break: keep-all;
+      text-align: center;
+    }
+
+    th {
+      background: #e5e5e5;
+      height: 2.875em;
+      font-size: 16px;
+      font-weight: normal;
+    }
+
+    td {
+
+      color: #888;
+      padding: 1em 0.5%;
+
+      &.strong {
+        font-weight: bold;
+        font-size: 20px;
+        color: #4e4d4d;
+      }
+    }
+  }
+
+  ul {
+    color: #888;
+    font-size: 16px;
+    margin-top: getPer(11, $body-width);
+
+    strong {
+      text-decoration: underline;
+      color: #4d4d4d;
+      font-size: 20px;
+    }
+  }
+}
+
+.modal_840 {
+  $width: 840;
+  
+  .modal_container {
+    max-width: $width+px;
+  }
+
+  .modal_content {
+    padding: getPer(65, $width) 0;
+  }
+
+  p {
+    text-align: center;
+    margin: getPer(30, $width) 0 getPer(26, $width);
+  }
+}
+
+
+.modal_track {
+
+  .modal_container {
+    max-width: 984px;
+  }
+
+  .modal_content {
+    border-color: #ffba00;
+  }
+
+  .track {
+    $width: 974;
+
+    display: block;
+    background-size: 100% auto !important;
+
+    &.officer {
+      @include bgImg('bg_track_officer.png');
+      @include paddingTop(getPer(1399, $width));
+    }
+
+    &.general {
+      @include bgImg('bg_track_general.png');
+      @include paddingTop(getPer(985, $width));
+    }
+  }
+}
+
+@include mobile {
+  
+  .modal {
+
+    .modal_content {
+      border-width: 3px;
+
+      h2 {
+        letter-spacing: -1px;
+        font-size: 28px;
+      }
+    }
+ 
+    .modal_button {
+      
+      button {
+        height: 50px;
+        font-size: 22px;
+      }
+    }
+  }
+
+  .modal_type {
+
+    .field {
+
+      label {
+        border-width: 3px;
+      }
+      
+      .part {
+        font-size: 32px;
+      }
+    }
+
+    .ps {
+      margin-top: 4%;
+    }
+  }
+  
+  .modal_alert, .modal_840 {
+
+    p {
+      font-size: 18px;
+    }
+
+    h2 + p {
+      font-size: 16px; 
+    }
+  }
+
+  .modal_agree1 {
+
+    .modal_content {
+
+      h2 {
+        
+        + p {
+          font-size: 16px;
+        }
+      }
+
+    }
+
+    .modal_body {
+
+      > div:last-child {
+
+        td {
+          font-size: 15px;
+        }
+      }
+    }
+
+    table {
+
+      td.strong {
+        font-size: 16px;
+      }
+    }
+    
+    ul {
+      font-size: 15px;
+
+      strong {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .modal_npsn {
+
+    p {
+      font-size: 16px;
+    }
+  }
+
+  .modal_register {
+
+    .field label, h3 {
+      font-size: 18px;
+    }
+
+    .field {
+
+      margin-top: 6%;
+      
+      p, li {
+        font-size: 13px;
+      }
+
+      .btn_NPSN {
+        font-size: 14px;
+        margin-top: 0;
+      }
+    }
+
+    .form {
+
+      .field_cert label {
+        width: 116px;
+      }
+
+      input[type=text], textarea, .field_cert div { 
+        font-size: 16px;
+      }
+
+      input[type=text] {
+        padding: 0 3%;
+      }
+
+      textarea {
+        padding: 3%;
+      }
+    }
+
+    .agree_list {
+      width: 100%;
+      font-size: 14px;
+      margin: 7% auto;
+    }
+  }
+}

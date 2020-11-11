@@ -1,0 +1,940 @@
+@charset "utf-8";
+
+// variables
+@import './utils/variables';
+$dir: 'https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200928/images_328F3B4383060A5B/event01_875A/';
+$max-width: 1000px;
+
+// mixins
+@import './utils/mixins';
+
+// functions
+@import './utils/functions';
+
+// reset
+@import './base/reset';
+
+// modules
+@import './modules/lnb';
+
+body {
+  background: #0a050b;
+  color: #4e4d4d;
+}
+
+/* layout */
+#wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+#screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background: #000;
+
+  &.hide {
+    opacity: 0;
+    transition: opacity 500ms linear;
+  }
+}
+
+section {
+  position: relative;
+
+  .bg_section {
+    @include absolute($top: 0, $left: 0, $bottom: 0);
+    width: 100%;
+  }
+
+  .char {
+    @include absolute;
+    background-size: 100% auto !important;
+  }
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.bg_container {
+  @include absolute($top: 0, $bottom: 0);
+}
+
+/* nav */
+#nav {
+  $border-height: 8px;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  background: #f1f0f2;
+  border-bottom: 2px solid #120616;
+  padding-bottom: $border-height;
+
+  &:before {
+    content: '';
+    @include absolute($left: 0, $bottom: 0, $right: 0);
+    height: $border-height;
+    background: #3d3196;
+  }
+
+  ul {
+    display: flex;
+    width: 100%;
+
+    margin: 0 auto;
+
+    li {
+      position: relative;
+    }
+
+    a {
+      position: relative;
+      display: block;
+
+      &:after {
+        @include absolute($bottom: $border-height * -1, $left: 0);
+        content: '';
+        width: 100%;
+        height: $border-height;
+      }
+
+      &:hover,
+      &.on {
+        background-position-y: 100%;
+
+        &:after {
+          background: #ff2365;
+        }
+      }
+    }
+
+    .nav3 {
+      &:after {
+        background-color: #420067 !important;
+      }
+    }
+  }
+}
+
+/* intro */
+.intro {
+  $obj: '.logo, .dao span, .head_wrap .txt, .head_wrap .n, .head_wrap p, .video_wrap span, .video_wrap .iframe, .video_wrap button';
+
+  box-sizing: border-box;
+
+  #{$obj} {
+    opacity: 0;
+  }
+
+  video {
+    @include absolute($top: 0, $left: 50%);
+  }
+
+  .bg_section {
+    @include bgSection('bg_intro.jpg');
+  }
+
+  .logo_wrap {
+    position: relative;
+    width: getPer(736);
+    margin: 0 auto getPer(59);
+    @include paddingTop(getPer(166, 736));
+
+    > div {
+      @include absolute(
+        $top: 0,
+        $left: getPer(76, 736),
+        $right: getPer(76, 736)
+      );
+      display: flex;
+      justify-content: space-between;
+      height: getPer(56, 166);
+      padding-top: getPer(110, 736);
+    }
+
+    .line {
+      @include absolute($bottom: getPer(29, 166));
+      width: getPer(60, 736);
+      height: 2px;
+      margin-top: -1px;
+      transform: scaleX(0);
+
+      &:first-child {
+        left: 0;
+        background: #d045db;
+        transform-origin: 100% 50%;
+      }
+
+      &:last-child {
+        right: 0;
+        background: #9146f4;
+        transform-origin: 0 50%;
+      }
+    }
+
+    .logo {
+      $translate-x: 20px;
+      position: relative;
+      width: 50%;
+
+      img {
+        @include widthPer;
+      }
+
+      &._l1 {
+        transform: translateX($translate-x);
+      }
+
+      &._l2 {
+        transform: translateX($translate-x * -1);
+      }
+    }
+
+    .dao {
+      @include absolute($left: getPer(168, 584), $top: 0);
+      width: getPer(245, 584);
+
+      span {
+        display: block;
+        background-size: 100% auto !important;
+        transform: scale(0);
+      }
+
+      .shape {
+        @include widthPer;
+        @include bgImg('bg_dao_shape.png');
+        @include paddingTop(100%);
+      }
+
+      .body {
+        @include absolute($top: getPer(10, 245), $left: getPer(16, 245));
+        width: getPer(188, 245);
+        @include bgImg('bg_dao_body.png');
+        @include paddingTop(getPer(171, 188));
+        transform-origin: 60% 100%;
+      }
+    }
+
+    .coming {
+      display: block;
+      width: getPer(647, 736);
+      margin: getPer(60, 736) auto 0;
+    }
+  }
+
+  .head_wrap {
+    .blur {
+      @include absolute($top: getPer(-90, 97), $left: getPer(-165));
+      width: getPer(1335);
+      @include paddingTop(getPer(284, 1335));
+      @include bgImg('bg_blur_headline.png');
+    }
+
+    div {
+      $width: 880;
+
+      position: relative;
+      display: flex;
+      width: getPer($width);
+      justify-content: space-between;
+      margin: 0 auto getPer(20);
+
+      span {
+        background-size: 100% auto !important;
+      }
+
+      .n,
+      .txt {
+        transform: translateX(200px) skew(23deg);
+      }
+
+      .txt {
+        position: relative;
+        width: getPer(360, $width);
+        @include paddingTop(getPer(97, 360));
+      }
+
+      .car {
+        @include bgImg('txt_headline_car.png');
+      }
+
+      .krp {
+        @include bgImg('txt_headline_krp.png');
+      }
+
+      .n {
+        @include absolute($top: 0, $left: getPer(344, $width));
+        width: getPer(194, $width);
+        height: 100%;
+        @include bgImg('txt_headline_n.png');
+      }
+    }
+
+    p {
+      $sub_width: 763;
+
+      display: block;
+      width: getPer($sub_width);
+      transform: translateX(-100px) skew(23deg);
+      @include paddingTop(getPer(47, $sub_width));
+      @include bgImg('txt_headline_sub.png');
+      background-size: 100% auto;
+      margin: 0 auto;
+    }
+  }
+
+  .video_wrap {
+    $width: 856;
+    $height: 778;
+
+    position: relative;
+    width: getPer($width);
+    @include paddingTop(getPer($height, $width));
+    margin: getPer(43) auto 0;
+
+    .bg {
+      @include absolute;
+      background-size: 100% auto !important;
+    }
+
+    .bg_bottom {
+      $bottom-width: getPer(2561, 856);
+      left: 50%;
+      bottom: 0;
+      width: $bottom-width;
+      @include paddingTop(getPer(655, 2561));
+      @include bgImg('bg_bottom.png');
+      margin-left: $bottom-width * -0.5;
+    }
+
+    .bg_video {
+      top: 0;
+      left: getPer(-32, $width);
+      width: getPer(922, $width);
+      @include paddingTop(getPer(482, 922));
+      @include bgImg('bg_video.png');
+    }
+
+    .iframe {
+      @include absolute($top: 0, $left: 0);
+      width: 100%;
+      height: getPer(476, $height);
+      box-sizing: border-box;
+      padding: getPer(7, $width);
+
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .char {
+      &.bazzie {
+        top: getPer(295, $height);
+        left: getPer(-101, $width);
+        width: getPer(185, $width);
+        @include paddingTop(getPer(265, 185));
+        @include bgImg('bg_bazzie_video.png');
+        transform: translate(-100px, 0);
+      }
+
+      &.car {
+        top: getPer(291, $height);
+        left: getPer(484, $width);
+        width: getPer(515, $width);
+        @include paddingTop(getPer(264, 515));
+        @include bgImg('bg_car_video.png');
+        transform-origin: 100% 0;
+        transform: translate(70px, -10px) scale(0.6);
+      }
+    }
+
+    button {
+      @include absolute($top: getPer(185, $height), $left: 50%);
+      width: getPer(119, $width);
+      @include paddingTop(100%);
+      @include bgImg('btn_video.png');
+      background-size: 100% auto;
+      margin-left: getPer(-60, $width);
+      transform: scale(0.5);
+    }
+  }
+
+  .load & {
+    #{$obj} {
+      opacity: 1;
+    }
+
+    .logo_wrap {
+      .logo {
+        transform: translateX(0);
+        transition: opacity 300ms ease, transform 500ms ease;
+        transition-delay: 300ms;
+      }
+
+      .dao {
+        span {
+          transform: scale(1);
+        }
+
+        .shape {
+          transition: opacity 300ms ease, transform 200ms ease;
+        }
+
+        .body {
+          transition: opacity 300ms ease,
+            transform 300ms cubic-bezier(0, 0.3, 0.3, 1.2);
+          transition-delay: 150ms;
+        }
+      }
+
+      .line {
+        transition: transform 200ms ease;
+        transform: scaleX(1);
+        transition-delay: 400ms;
+      }
+    }
+
+    .head_wrap {
+      p,
+      .n,
+      .txt {
+        transform: translateX(0) skew(0);
+        transition: opacity 300ms ease,
+          transform 1s cubic-bezier(0, 0.7, 0.2, 1);
+      }
+
+      .car {
+        transition-delay: 450ms;
+      }
+
+      .n {
+        transition-delay: 500ms;
+      }
+
+      .krp {
+        transition-delay: 550ms;
+      }
+
+      p {
+        transition-delay: 650ms;
+      }
+    }
+
+    .video_wrap {
+      .bg,
+      .iframe {
+        transition: opacity 300ms 600ms linear;
+      }
+
+      .char {
+        transform: translate(0, 0) scale(1);
+        transition: opacity 300ms ease,
+          transform 1s cubic-bezier(0, 0.7, 0.2, 1);
+
+        &.bazzie {
+          transition-delay: 800ms;
+        }
+
+        &.car {
+          transition-delay: 900ms;
+        }
+      }
+
+      button {
+        transform: scale(1);
+        transition: opacity 300ms ease, transform 500ms ease;
+        transition-delay: 1100ms;
+      }
+    }
+  }
+}
+
+/* footer */
+footer {
+  @include absolute($bottom: 0, $left: 0);
+  width: 100%;
+  text-align: center;
+
+  .copyright {
+    position: relative;
+    display: flex;
+    color: #a5a5a5;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    margin-bottom: getPer(60);
+  }
+
+  img {
+    height: 1.75em;
+    margin-top: 0.67em;
+  }
+
+  span {
+    margin: 0 10 / 12 * 1em;
+  }
+
+  .btn_policy {
+    border: 1px solid #a5a5a5;
+    padding: 5 / 12 * 1em 8 / 12 * 1em;
+  }
+}
+
+/* modal */
+.modal {
+  $width: 856;
+
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 500;
+  transition: opacity 200ms ease;
+  letter-spacing: -1px;
+  background: rgba(0, 0, 0, 0.8);
+  font-size: 15px;
+  line-height: 1.25;
+
+  .modal_wrap {
+    @include absolute($top: 0, $left: 0);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    padding: 2% 0;
+  }
+
+  &.show {
+    display: block;
+    opacity: 0;
+  }
+
+  &.fadein {
+    opacity: 1;
+  }
+
+  .modal_container {
+    position: relative;
+    width: 90%;
+    max-width: $width + px;
+    margin: auto;
+  }
+
+  .modal_content {
+    position: relative;
+  }
+
+  .btn_x {
+    display: block;
+    position: relative;
+    width: 56px;
+    @include bgImg('btn_modal_close.png');
+    background-size: 100% auto;
+    @include paddingTop(130%);
+    margin: 0 auto;
+  }
+
+  .modal_content {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    @include paddingTop(getPer(476, $width));
+    @include bgImg('bg_video_modal.png', 50% 0);
+    background-size: auto 100%;
+
+    .iframe {
+      @include absolute($top: 0, $left: 0, $right: 0, $bottom: 0);
+      margin: getPer(7, $width);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@include desktop {
+  #nav {
+    top: 0;
+
+    ul {
+      max-width: 990px;
+
+      li {
+        &:first-child {
+          width: 30.31%;
+          max-width: 300px;
+          a {
+            @include paddingTop(getPer(60, 300));
+          }
+        }
+
+        &:last-child {
+          width: 33.34%;
+          max-width: 330px;
+
+          a {
+            @include paddingTop(getPer(60, 330));
+          }
+        }
+
+        &:nth-child(2) {
+          width: 36.37%;
+          max-width: 360px;
+
+          &:before {
+            @include absolute($top: 38.33%, $left: -1px);
+            content: '';
+            width: 2px;
+            height: getPer(14, 60);
+            background: #848384;
+          }
+
+          a {
+            @include paddingTop(getPer(60, 360));
+          }
+        }
+      }
+
+      @for $i from 1 through 3 {
+        .nav#{$i} {
+          @include bgImg('txt_nav#{$i}.png');
+        }
+      }
+
+      a {
+        background-size: auto 200% !important;
+      }
+
+      .nav3 {
+        .bar {
+          display: none;
+          @include absolute($top: 100%, $left: 0);
+          width: 100%;
+          height: 2px;
+          margin-top: 8px;
+          background-color: #fcff00;
+        }
+
+        &:hover {
+          .bar {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .container {
+    max-width: $max-width;
+
+    .bg_container {
+      width: getPer(1400px, $max-width);
+      left: 50%;
+      margin-left: getPer(-700px, $max-width);
+      background-size: 100% auto !important;
+    }
+  }
+
+  .intro {
+    padding-top: 70px;
+
+    .container {
+      height: getPer(1327);
+      max-height: 1327px;
+      padding-top: 44px;
+    }
+  }
+
+  .content1 {
+    .container {
+      @include paddingTop(getPer(1700));
+
+      .bg_container {
+        @include bgImg('bg_cnt_content1.png');
+      }
+    }
+
+    .car {
+      $width: 974;
+
+      top: getPer(499, 1700);
+      left: getPer(-30);
+      width: getPer($width);
+      @include paddingTop(getPer(496, $width));
+      @include bgImg('bg_car_content1.png');
+      opacity: 0;
+      transform-origin: 100% 0;
+      transform: translate(80px, -10px) scale(0.8);
+
+      &.active {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+        transition: opacity 300ms ease,
+          transform 1s cubic-bezier(0, 0.7, 0.2, 1);
+      }
+    }
+
+    .item {
+      @include absolute($top: getPer(1308, 1700), $left: 0);
+      width: 100%;
+
+      .char {
+        top: 0;
+        width: getPer(325);
+        @include paddingTop(getPer(195, 325));
+      }
+
+      .number {
+        left: getPer(35);
+        @include bgImg('bg_number_content1.png');
+        animation: scaling 500ms linear infinite alternate;
+      }
+
+      .balloon {
+        left: getPer(641);
+        @include bgImg('bg_balloon_content1.png');
+        animation: doongdoong 600ms ease infinite alternate;
+      }
+    }
+  }
+
+  .content2 {
+    .container {
+      @include paddingTop(getPer(3373));
+
+      .bg_container {
+        @include bgImg('bg_cnt_content2.png');
+      }
+    }
+
+    .item {
+      @include absolute($top: getPer(748, 3373), $left: 0);
+      width: 100%;
+
+      .char {
+        transform-origin: 50% 100%;
+        opacity: 0;
+      }
+
+      .marid {
+        top: 0;
+        left: getPer(-213);
+        width: getPer(431);
+        @include bgImg('bg_uni_content2.png');
+        @include paddingTop(getPer(343, 431));
+        transform: translate(-200px, 200px);
+        margin-top: getPer(176);
+      }
+
+      .ethi {
+        top: 0;
+        left: getPer(826);
+        width: getPer(424);
+        @include bgImg('bg_ethi_content2.png');
+        @include paddingTop(getPer(611, 424));
+        transform: translate(200px, 200px);
+      }
+
+      &.active {
+        .char {
+          opacity: 1;
+          transform: translate(0, 0);
+          transition: opacity 300ms ease,
+            transform 500ms cubic-bezier(0.1, 0.5, 0, 1.2);
+        }
+
+        .marid {
+          animation: rotateLeft 2s 600ms infinite linear;
+        }
+
+        .ethi {
+          animation: rotateRight 2s 600ms infinite linear;
+        }
+      }
+    }
+
+    .car {
+      left: getPer(698);
+      bottom: 0;
+      width: getPer(1082);
+      @include paddingTop(getPer(548, 1082));
+      @include bgImg('bg_car_content2.png');
+      opacity: 0.3;
+    }
+  }
+}
+
+@include tablet {
+  $width: 750;
+
+  .container {
+    max-width: $width + px;
+
+    .bg_container {
+      left: 0;
+      width: 100%;
+    }
+  }
+
+  .intro {
+    display: flex;
+    align-items: center;
+    padding-top: calc(50px + 10%);
+    overflow: hidden;
+
+    .logo_wrap {
+      .line {
+        height: 1px;
+      }
+    }
+
+    .head_wrap {
+      p {
+        @include bgMobile('txt_headline_sub.png');
+
+        &:before {
+          padding-top: getPer(37, 450);
+        }
+      }
+    }
+
+    .video_wrap {
+      margin-top: getPer(58, $width);
+    }
+  }
+
+  #nav {
+    bottom: 0;
+    border-bottom-width: 1px;
+
+    ul {
+      max-width: 375px;
+
+      li {
+        width: 33.34%;
+      }
+
+      a {
+        @include paddingTop(getPer(120, $width / 3));
+      }
+
+      @for $i from 1 through 3 {
+        .nav#{$i} {
+          @include bgMobile('txt_nav#{$i}.png');
+        }
+      }
+    }
+  }
+
+  .content1 {
+    .container {
+      @include paddingTop(getPer(1102, $width));
+
+      .bg_container {
+        @include bgMobile('bg_cnt_content1.png');
+      }
+    }
+  }
+
+  .content2 {
+    .container {
+      @include paddingTop(getPer(3000, $width));
+
+      .bg_container {
+        @include bgMobile('bg_cnt_content2.png');
+      }
+    }
+  }
+
+  footer {
+    margin-bottom: calc(16% + 8px);
+
+    .copyright {
+      display: block;
+      font-size: 9px;
+      line-height: 14px;
+
+      img {
+        display: block;
+        height: 18px;
+        margin: 0 auto 2px;
+      }
+
+      a {
+        display: inline-block;
+        padding: 0 5px;
+      }
+    }
+  }
+}
+
+@keyframes doongdoong {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes scaling {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.95);
+  }
+}
+
+@keyframes rotateLeft {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(0);
+  }
+  75% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes rotateRight {
+  0% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(3deg);
+  }
+  50% {
+    transform: rotate(0);
+  }
+  75% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}

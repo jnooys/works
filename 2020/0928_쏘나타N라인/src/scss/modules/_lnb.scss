@@ -1,0 +1,343 @@
+@mixin bgLNB ($file) {
+  background: url('https://nxm-mt.akamaized.net/Contents/kartrush.nexon.com/event_200928/images_328F3B4383060A5B/#{$file}') no-repeat;
+}
+
+/* header */
+header {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  background: #2e3191;
+  z-index: 100;
+
+  .download_btn {
+    @include absolute($top: 8px, $right: 10px);
+
+    overflow: hidden;
+    
+    a {
+      display: block;
+      width: 116px;
+      height: 34px;
+      float :left;
+      @include ir;
+      @include bgLNB('spr_btn_download.png');
+      background-size: 116px auto;
+
+      &.btn_google {
+        background-position: 0 100%;
+        margin-left: 11px;
+      }
+    }
+  }
+}
+
+/* lnb */
+#lnb {
+  $width: 210px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $width;
+  height: 100%;
+  z-index: 100;
+  transition: left 300ms ease;
+
+  .lnb_scroll {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .lnb_wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    @include ir;
+  }
+
+  h1 {
+    width: 100%;
+
+    a {
+      display: block;
+      height: 140px;
+      @include bgLNB('h1.png');
+      background-color: #1d1f76;
+      background-size: auto 100%;
+    }
+  }
+
+  .btn_toggle {
+    @include absolute($top:0, $left: $width);
+    width: 50px;
+    height: 50px;
+    background: #1d1f76;
+
+    span {
+      @include absolute($top: 23px, $left: 9px);
+      width: 32px;
+      height: 4px;
+      background: #fdbd10;
+      border-radius: 10px;
+      transition: all 300ms ease;
+
+      &:first-child {
+        width: 10px;
+        margin: -8px 0 0 3px;
+        transform: rotate(45deg);
+      }
+
+      &:last-child {
+        width: 15px;
+        margin: 6px 0 0 14px;
+        transform: rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  
+  .gnb {
+     
+    a {
+      @include bgLNB('spr_lnb.png');
+    }
+  }
+  
+  &.hide {
+    left: -$width;
+
+    .btn_toggle {
+      
+      span {
+        left: 12px;
+        width: 24px;
+        margin: 0;
+
+        &:first-child {
+          transform: translateY(-10px);
+          opacity: 1;
+        }
+
+        &:nth-child(2) {
+          transform: rotate(0);
+          opacity: 0;
+        }
+
+        &:nth-child(3) {
+          transform: rotate(0);
+        }
+
+        &:last-child {
+          transform: translateY(10px);
+          background: #fdbd10;
+        }
+      }
+    }
+  }
+
+  .util {
+    position: relative;
+    margin: auto auto 40px;
+    
+    ul {
+      $class: (btn_home, btn_youtube, btn_forum);
+      $height: 25px;
+
+      display: flex;
+      justify-content: center;
+
+      li {
+        margin: 0 10px;
+      }
+
+      a {
+        width: 31px;
+        height: $height;
+
+        @include bgLNB('spr_util.png');
+        background-size: 100% auto;
+
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+
+      @each $cls in $class {
+        
+        .#{$cls} {
+          background-position-y: (1 - index($class, $cls)) * $height;
+        }
+      }
+    }
+
+    .download_btn {
+      $class: (btn_app, btn_google);
+      $height: 48px;
+
+      width: 160px;
+      margin: 15px auto 0;
+
+      a {
+        height: $height;
+        @include bgLNB('spr_btn_download_lnb.png');
+        background-size: 100% auto;
+
+        &:last-child {
+          margin-top: 7px;
+        }
+      }
+
+      @each $cls in $class {
+        .#{$cls} {
+          background-position-y: (1 - index($class, $cls)) * $height;
+        }
+      }
+    }
+  }
+}
+
+/* responsive */
+@include desktop {
+
+  #lnb {
+
+    .gnb {
+      width: 160px;
+      margin: 0 auto 40px;
+      padding-top: 30px;
+  
+      li {
+  
+        margin-bottom: 15px;
+  
+        a {
+          position: relative;
+          height: 123px;
+          background-position-x: -25px;
+  
+          &:before, &:after {
+            @include absolute($top: 0, $left: 0, $right: 0);
+            content: "";
+            height: 99px;
+          }
+  
+          &:before {
+            background: rgba(#000, 0.4);
+            transform: translateX(-120%) skew(-30deg);
+            transition: transform 200ms ease;
+          }
+  
+          &:hover:before {
+            transform: translateX(0) skew(0);
+          }
+  
+          &:after {
+            box-sizing:border-box;
+            border: 3px solid #3f43ba;          
+          }
+        }
+
+        &.on a, a:hover {
+          background-position-x: -235px;
+        }
+  
+        @for $i from 1 through 5 {
+          &.l#{$i} {
+            a {
+              background-position-y: (1 - $i) * 139px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include tablet {
+
+  header {
+    display: block;
+  }
+
+  #lnb {
+
+    .lnb_scroll {
+      background: #07071C;
+    }
+
+    .dim {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(#000, 0.8);
+    }
+
+    .gnb {
+
+      margin-bottom: 20px;
+
+      li {
+        $height: 70px;
+
+        border-bottom: 1px solid #555;
+
+        a {
+          height: $height;
+          background-color: #03030E;
+          background-position-x: -420px;
+        }
+
+        &.on a, a:hover {
+          background-position-x: -630px;
+        }
+
+        @for $i from 1 through 5 {
+          &.l#{$i} {
+            a {
+              background-position-y: (1 - $i) * $height;
+            }
+          }
+        }
+      }
+    }
+
+    .util {
+      margin-bottom: 20px;
+
+      .download_btn {
+        display: none;
+      }
+
+    }
+    
+    &.hide {
+
+      .btn_toggle {
+        background-color: #2e3191;
+      }
+
+      .dim {
+        display: none;
+      }
+    }
+  }
+}
