@@ -12,7 +12,7 @@ export default function setVideoRatio() {
     let width = w;
     let height = h;
 
-    if(w > h) {
+    if(w / h > ratio) {
       height = Math.round(w / ratio);
     } else {
       width = Math.round(h * ratio);
