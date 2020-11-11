@@ -1,7 +1,7 @@
 # 쏘나타 N 라인
 
-- PC http://rongchyo.cafe24.com/project/2020/sonata/event01.html
-- Mobile http://rongchyo.cafe24.com/project/2020/sonata/event02.html
+- 쏘나타 N 카러플 http://rongchyo.cafe24.com/project/2020/sonata/event01.html
+- 쏘나타 N 라인컵 참가신청 http://rongchyo.cafe24.com/project/2020/sonata/event02.html
 
 ## specifications
 
