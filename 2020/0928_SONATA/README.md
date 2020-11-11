@@ -6,8 +6,9 @@
 ## specifications
 
 1. IE11+, Modern Broswer 지원
-2. ES6+, scss 사용
-3. API 이용하여 참가신청 기능 구현
+2. 반응형 페이지
+3. ES6+, scss 사용
+4. API 이용하여 참가신청 기능 구현
 
 ## modules
 
