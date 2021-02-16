@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Modal from '../modules/modal';
-import PRIKartrush from './PRIKartrush';
+import callAPI from './callAPI';
 import returnCodeTable from './returnCodeTable';
 import validationConfig from './validationConfig';
 
@@ -281,7 +281,7 @@ const controlForm = (() => {
   // destroy form
   function destroy() {
     modal.close('modalRegister', clearForm);
-    PRIKartrush.IdentifyClear();
+    callAPI.IdentifyClear();
 
     function clearForm() {
       clearTitleType();
@@ -351,7 +351,7 @@ function certificate() {
   const button = certField.querySelector('button');
   button.addEventListener('click', function () {
     const type = getType(inputType.value);
-    PRIKartrush.IdentifyOpen(callbackCert, type);
+    callAPI.IdentifyOpen(callbackCert, type);
   });
 }
 
@@ -360,14 +360,13 @@ function callbackCert(resultCode) {
   if (resultCode === 0) {
     const button = certField.querySelector('button');
 
-    certField.querySelector('input#Name').value = PRIKartrush.validData.name;
-    certField.querySelector('input#Phone').value =
-      PRIKartrush.validData.mobilePhone;
-    certField.querySelector('input#Birth').value = PRIKartrush.validData.birth;
+    certField.querySelector('input#Name').value = callAPI.validData.name;
+    certField.querySelector('input#Phone').value = callAPI.validData.mobilePhone;
+    certField.querySelector('input#Birth').value = callAPI.validData.birth;
     button.innerHTML = '인증완료 <span class="icon"></span>';
     button.disabled = true;
     button.classList.add('disabled');
-    modal.alert('휴대폰 본인인증을 완료하였습니다.');
+    //modal.alert('휴대폰 본인인증을 완료하였습니다.');
     return;
   }
 
@@ -391,7 +390,7 @@ function submitRegister() {
     e.preventDefault();
     const parameter = validate();
     if (!parameter) return;
-    PRIKartrush.SonataEventJoin(
+    callAPI.SonataEventJoin(
       parameter.type,
       parameter.data,
       // success
@@ -414,7 +413,7 @@ function submitRegister() {
   // 밸리데이션 체크
   function validate() {
     // 휴대폰 인증 확인
-    if (!PRIKartrush.validData) {
+    if (!callAPI.validData) {
       modal.alert(validationConfig.Certificate[0]);
       return false;
     }
@@ -481,24 +480,9 @@ function submitRegister() {
     }
   }
 
-  // push MSMS
-  function pushMSMS(mobile, type) {
-    const parameterMSMS = {
-      eventIdName: 'kartrush_kr_20200928',
-      userInfo: mobile,
-      countryCode: 'KR',
-      channel: getChannel,
-      osType: '',
-      tag: type,
-    };
-
-    axios.post('https://eventwebapi.nexon.com/InsertMSMS', parameterMSMS);
-  }
-
   // success
   function successCallback(type) {
     const date = new Date();
-    pushMSMS(PRIKartrush.validData.mobilePhone, type);
     controlForm.destroy();
     modal.alert(
       `[넥슨코리아] ${date.getFullYear()}년 ${

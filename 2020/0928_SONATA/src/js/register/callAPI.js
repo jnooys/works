@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const PRIKartrush = {
+const callAPI = {
   requestCrypt: '',
   authToken: '',
   validData: null,
@@ -23,62 +23,71 @@ const PRIKartrush = {
   },
 
   IdentifyOpen(funcName, eventType) {
-    PRIKartrush.callbackFuncName = funcName;
-    PRIKartrush.eventType = eventType;
-    axios
+    callAPI.callbackFuncName = funcName;
+    callAPI.eventType = eventType;
+    /*axios
       .get('https://pri.nexon.com/Events/KartRush/AuthRequestCrypt')
       .then((resultData) => {
         switch (resultData.resultCode) {
           case 0:
-            PRIKartrush.requestCrypt = resultData.resultValue.requestCrypt;
-            PRIKartrush.IdentifyOpenPop();
+            callAPI.requestCrypt = resultData.resultValue.requestCrypt;
+            callAPI.IdentifyOpenPop();
             break;
           case -400:
-            PRIKartrush.callbackFunc(-400);
+            callAPI.callbackFunc(-400);
             break;
           case 56:
-            PRIKartrush.callbackFunc(-201);
+            callAPI.callbackFunc(-201);
             break;
           case -202:
-            PRIKartrush.callbackFunc(-202);
+            callAPI.callbackFunc(-202);
             break;
           default:
-            PRIKartrush.callbackFunc(-200);
+            callAPI.callbackFunc(-200);
         }
       })
       .catch(() => {
-        PRIKartrush.callbackFunc(-203);
+        callAPI.callbackFunc(-203);
       });
+      */
+    // dummy data
+    callAPI.validData = {
+      name: '홍길동',
+      mobilePhone: '01012345678',
+      birth: '1989-12-25',
+    }
+
+    callAPI.callbackFunc(0);
   },
 
   IdentifyValid(_responseCrypt, _authCrypt) {
     this.authToken = _authCrypt;
     axios
       .post('https://pri.nexon.com/Events/KartRush/AuthTokenValid', {
-        eventType: PRIKartrush.eventType,
+        eventType: callAPI.eventType,
         responseCrypt: _responseCrypt,
         authCrypt: _authCrypt,
       })
       .then((resultData) => {
         switch (resultData.resultCode) {
           case 0:
-            PRIKartrush.validData = resultData.resultValue;
-            PRIKartrush.callbackFunc(0);
+            callAPI.validData = resultData.resultValue;
+            callAPI.callbackFunc(0);
             break;
           case -21:
           case -22:
           case -400:
-            PRIKartrush.callbackFunc(resultData.resultCode);
+            callAPI.callbackFunc(resultData.resultCode);
             break;
           case 48:
-            PRIKartrush.callbackFunc(-301);
+            callAPI.callbackFunc(-301);
             break;
           default:
-            PRIKartrush.callbackFunc(-300);
+            callAPI.callbackFunc(-300);
         }
       })
       .catch(() => {
-        PRIKartrush.callbackFunc(-302);
+        callAPI.callbackFunc(-302);
       });
   },
   IdentifyClear() {
@@ -90,16 +99,16 @@ const PRIKartrush = {
   // 이벤트참가 신청하기
   SonataEventJoin(type, apiParam, onSuccess, onError) {
     try {
-      apiParam['AuthToken'] = PRIKartrush.authToken;
-      apiParam['CompareToken'] = PRIKartrush.validData.compareToken;
-      apiParam['Name'] = PRIKartrush.validData.name;
-      apiParam['Phone'] = PRIKartrush.validData.mobilePhone;
-      apiParam['Birth'] = PRIKartrush.validData.birth;
+      apiParam['AuthToken'] = callAPI.authToken;
+      apiParam['CompareToken'] = callAPI.validData.compareToken;
+      apiParam['Name'] = callAPI.validData.name;
+      apiParam['Phone'] = callAPI.validData.mobilePhone;
+      apiParam['Birth'] = callAPI.validData.birth;
     } catch (err) {
       onSuccess({ Result: -1 });
       return;
     }
-    axios
+    /*axios
       .post(
         `https://pri.nexon.com/Events/KartRush/${
           type == 'office' ? 'SonataEventOfficeJoin' : 'SonataEventNormalJoin'
@@ -108,7 +117,11 @@ const PRIKartrush = {
       )
       .then(onSuccess)
       .catch(onError);
+    */
+
+    // dummy data
+    onSuccess({Result: 0});
   },
 };
 
-export default PRIKartrush;
+export default callAPI;
